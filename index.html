@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F3F3F0">
+<meta name="description" content="Discover career paths built around your skills, interests and ambitions. Get a clear next step with Vertez.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vertez — career advice, formulated for you">
+<meta property="og:description" content="Turn your skills, interests and ambitions into career paths you can explore.">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<title>Vertez — career advice, formulated for you</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F3F0;--fg:#0D0D0D;--mute:#6E6E69;--line:#0D0D0D;--soft:rgba(13,13,13,.16);--card:#FAFAF8;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C0C0B;--fg:#EEEEEA;--mute:#8F8F89;--line:#EEEEEA;--soft:rgba(238,238,234,.18);--card:#141413;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0C0C0B;--fg:#EEEEEA;--mute:#8F8F89;--line:#EEEEEA;--soft:rgba(238,238,234,.18);--card:#141413;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 1rem/1.6 "Hanken Grotesk",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-weight:500;margin:0;letter-spacing:-.035em;line-height:.98}
+p{margin:0}a{color:inherit}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.mono,.btn,.chip,.prog,.field label,.pct,.tag{font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+/* header */
+header.top{border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-weight:600;letter-spacing:.22em;text-decoration:none;font-size:.95rem}
+header.top nav{display:flex;gap:28px}
+header.top a.nl{text-decoration:none;color:var(--mute);font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:500;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+header.top a.nl:hover{color:var(--fg)}
+/* hero */
+.hero{padding:96px 0 0;position:relative;overflow:hidden}#sp{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(3.4rem,10.5vw,10rem);font-weight:500;letter-spacing:-.055em;line-height:.9;max-width:9ch}
+.hero .sub{max-width:40ch;margin-top:36px;color:var(--mute);font-size:1.12rem}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+.btn{padding:17px 28px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);cursor:pointer;text-decoration:none;display:inline-block;border-radius:0;transition:background .25s,color .25s}
+.btn:hover{background:transparent;color:var(--fg)}
+.btn.o{background:transparent;color:var(--fg)}
+.btn.o:hover{background:var(--fg);color:var(--bg)}
+.spec{display:grid;grid-template-columns:repeat(3,1fr);margin-top:110px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.spec div{padding:26px 28px 26px 0}.spec div+div{padding-left:28px;border-left:1px solid var(--line)}
+.spec b{display:block;font-weight:500;font-size:1.5rem;letter-spacing:-.03em;margin-top:10px}
+.fx{margin-top:0;border-bottom:1px solid var(--line);padding:34px 0}
+.fx .wrap{display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:baseline}
+#fx{transition:opacity .45s,transform .45s}
+#fx.o{opacity:0;transform:translateY(8px)}
+#fx .in{display:block;font:400 1rem "Hanken Grotesk",system-ui,sans-serif;color:var(--mute)}
+#fx .out{display:block;font-size:clamp(1.8rem,4.2vw,3.4rem);letter-spacing:-.04em;font-weight:500;margin-top:6px}
+section{padding:120px 0}
+.sh{display:grid;grid-template-columns:200px 1fr;gap:20px;margin-bottom:56px}
+.sh h2{font-size:clamp(2.2rem,5vw,4.2rem);max-width:14ch}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.steps div{padding:28px 28px 40px 0}.steps div+div{padding-left:28px;border-left:1px solid var(--line)}
+.steps h3{font-size:1.7rem;margin:34px 0 12px}.steps p{color:var(--mute);max-width:30ch}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease var(--d,0s),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0s)}.rv.in{opacity:1;transform:none}
+/* advisor */
+.flow{border:1px solid var(--line);background:var(--card);padding:44px;max-width:860px}
+.prog{display:flex;gap:0;list-style:none;padding:0;margin:0 0 38px;border:1px solid var(--soft);flex-wrap:wrap}
+.prog li{flex:1 1 140px;padding:11px 14px;color:var(--mute)}.prog li+li{border-left:1px solid var(--soft)}
+.prog li.on{background:var(--fg);color:var(--bg)}.prog li.done{color:var(--fg)}
+.pane[hidden]{display:none}.pane{animation:fade .5s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.pane h3{font-size:2.1rem;margin-bottom:10px}
+.hint{color:var(--mute);font-size:.95rem;margin-bottom:24px;max-width:52ch}
+.field{margin-bottom:22px}.field label{display:block;color:var(--mute);margin-bottom:8px}
+.field input,.field select,.addrow input,.join input{width:100%;font:400 1rem "Hanken Grotesk",sans-serif;padding:14px;border:1px solid var(--soft);background:transparent;color:var(--fg);border-radius:0}
+.field input:focus,.field select:focus,.addrow input:focus,.join input:focus{outline:0;border-color:var(--fg)}
+select option{background:var(--bg);color:var(--fg)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chips,.seg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{padding:10px 14px;border:1px solid var(--soft);background:transparent;color:var(--fg);cursor:pointer;border-radius:0;transition:background .2s,color .2s,border-color .2s}
+.chip:hover{border-color:var(--fg)}.chip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.addrow{display:flex;gap:10px;margin:0 0 34px}.addrow .btn{padding:14px 20px}
+.nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px}
+.err{min-height:1.5em;font-size:.92rem;margin-bottom:6px;font-weight:500}
+.wel{border:1px solid var(--fg);padding:12px 16px;margin-bottom:26px;font-size:.92rem}
+.res{padding:26px 0;border-top:1px solid var(--line);animation:fade .7s both;animation-delay:var(--d,0s)}
+.res .top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.res h4{font-size:1.8rem}.res .pct{font-size:.85rem}
+.bar{height:2px;background:var(--soft);margin:14px 0 16px}.bar b{display:block;height:100%;width:0;background:var(--fg);transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+.res p{color:var(--mute);font-size:.95rem;margin-top:6px}.res strong{color:var(--fg);font-weight:600}
+.load{font:500 .8rem "Hanken Grotesk",system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:30px 0;animation:pulse 1.2s steps(2) infinite}
+@keyframes pulse{50%{opacity:.25}}
+.empty{color:var(--mute);padding:30px 0}
+/* who + join */
+.who{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+.who article{padding:30px 30px 44px 0}.who article+article{padding-left:30px;border-left:1px solid var(--line)}
+.who h3{font-size:2rem;margin-bottom:18px}.who ul{margin:0;padding:0;list-style:none}.who li{padding:13px 0;border-top:1px solid var(--soft);color:var(--mute)}
+.final{border-top:1px solid var(--line)}
+.final h2{font-size:clamp(2.6rem,8vw,7.5rem);letter-spacing:-.055em;line-height:.92;max-width:10ch}
+.join{display:flex;gap:10px;flex-wrap:wrap;margin-top:44px;max-width:620px}.join input{flex:1 1 260px;width:auto}
+.msg{margin-top:16px;min-height:1.6em;font-weight:500}
+footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.blk{padding:110px 0;border-top:1px solid var(--line)}
+.big{font-size:clamp(1.8rem,4.4vw,3.6rem);letter-spacing:-.04em;line-height:1.08;font-weight:500;max-width:24ch}
+.notes{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.note{padding:28px 28px 44px 0;border-bottom:1px solid var(--line)}.note:not(:nth-child(3n+1)){padding-left:28px;border-left:1px solid var(--line)}
+.note h3{font-size:1.6rem;margin:34px 0 10px}.note p{color:var(--mute)}
+.tbl{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:1.1fr 1.6fr 1.4fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--soft);align-items:baseline}
+.row.two{grid-template-columns:1fr 1.4fr}.row.h{padding:12px 0;border-bottom:1px solid var(--line)}
+.row b{font-weight:500;font-size:1.5rem;letter-spacing:-.03em;line-height:1.1}.row.two b{font-size:1.35rem}.row span{color:var(--mute)}
+.tip{border:1px solid var(--line);padding:44px;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start}
+#tip{font-size:clamp(1.6rem,3.6vw,2.8rem);letter-spacing:-.035em;line-height:1.1;font-weight:500;min-height:3.4em;transition:opacity .3s,transform .3s}#tip.o{opacity:0;transform:translateY(8px)}.tip .btn{margin-top:26px}
+details{border-bottom:1px solid var(--soft)}details:first-of-type{border-top:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:22px 0;font-size:1.3rem;letter-spacing:-.02em;font-weight:500;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}summary::after{content:"+";font-weight:400;transition:transform .3s}details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--mute);padding:0 0 24px;max-width:60ch}
+.turnstile-host{position:fixed;left:-10000px;top:0;z-index:-1;width:1px;height:1px;overflow:hidden}
+.account-action{display:flex;justify-content:flex-end;align-items:center;gap:14px;margin:-12px 0 28px;color:var(--mute);font-size:.9rem}.account-action[hidden]{display:none}.account-action button{border:0;background:none;color:inherit;text-decoration:underline;cursor:pointer;font:inherit}
+@media(max-width:820px){.blk{padding:72px 0}.notes,.row,.row.two,.tip{grid-template-columns:1fr}.note,.note:not(:nth-child(3n+1)){padding:24px 0 30px;border-left:0}.row{gap:6px}.row.h{display:none}.tip{padding:24px 18px}}
+.menu{display:grid;grid-template-columns:repeat(4,1fr);margin-top:110px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cell{font:inherit;color:var(--fg);background:transparent;border:0;border-left:1px solid var(--line);padding:26px 24px 30px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:46px;transition:background .3s,color .3s;border-radius:0}
+.cell:first-child{border-left:0}
+.cell b{font-weight:500;font-size:1.5rem;letter-spacing:-.03em;display:flex;justify-content:space-between;align-items:baseline;width:100%}
+.cell b span{transition:transform .3s}.cell:hover b span{transform:translateX(6px)}
+.cell:hover{background:var(--fg);color:var(--bg)}
+.view{position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;overscroll-behavior:contain;padding:calc(64px + env(safe-area-inset-top,0px) + 56px) 0 calc(80px + env(safe-area-inset-bottom,0px));transform:translateY(100%);visibility:hidden;transition:transform .6s cubic-bezier(.77,0,.18,1),visibility 0s .6s}
+.view.open{transform:none;visibility:visible;transition:transform .6s cubic-bezier(.77,0,.18,1)}
+body.lock{overflow:hidden}
+#vbar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:env(safe-area-inset-top,0px) 28px 0;height:calc(64px + env(safe-area-inset-top,0px));background:var(--bg);border-bottom:1px solid var(--line);transform:translateY(-100%);visibility:hidden;transition:transform .5s cubic-bezier(.77,0,.18,1),visibility 0s .5s}
+#vbar.on{transform:none;visibility:visible;transition:transform .5s cubic-bezier(.77,0,.18,1) .1s}
+#vbar .tabs{display:flex;border:1px solid var(--soft)}
+#vbar .tabs button,#vx{font:500 .72rem "Hanken Grotesk",system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;background:transparent;color:var(--mute);border:0;cursor:pointer;border-radius:0;transition:background .2s,color .2s}
+#vbar .tabs button+button{border-left:1px solid var(--soft)}
+#vbar .tabs button:hover{color:var(--fg)}
+#vbar .tabs button[aria-current="true"]{background:var(--fg);color:var(--bg)}
+#vx{border:1px solid var(--line);color:var(--fg)}#vx:hover{background:var(--fg);color:var(--bg)}
+@media(max-width:820px){.menu{grid-template-columns:1fr 1fr;margin-top:64px}.cell{gap:30px;padding:20px 16px 22px}.cell:nth-child(odd){border-left:0}.cell:nth-child(n+3){border-top:1px solid var(--line)}.cell b{font-size:1.2rem}#vbar{padding-left:12px;padding-right:12px}#vbar .logo{display:none}#vbar .tabs button,#vx{padding:10px 9px;letter-spacing:.08em}}
+@media(max-width:820px){.wrap{padding:0 20px}section{padding:80px 0}.hero{padding-top:64px}header.top nav a.nl{display:none}.spec,.steps,.who,.two{grid-template-columns:1fr}.spec div,.spec div+div,.steps div,.steps div+div,.who article,.who article+article{padding:22px 0;border-left:0}.spec div+div,.steps div+div,.who article+article{border-top:1px solid var(--line)}.sh,.fx .wrap{grid-template-columns:1fr}.flow{padding:24px 18px}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}*{animation-duration:.01s!important}}
+
+.rd{list-style:none;margin:16px 0 0;padding:0;border-top:1px solid var(--soft)}
+.rd li{display:grid;grid-template-columns:84px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--soft);color:var(--mute);font-size:.92rem}
+.rd li::before{content:attr(data-d);font:500 .72rem "Hanken Grotesk",sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--fg);padding-top:3px}
+.res .wo{font-style:italic;margin-top:14px}
+.ask{margin-top:36px;border-top:1px solid var(--line);padding-top:24px}.ask label{display:block;margin-bottom:12px;color:var(--mute)}
+.qa{padding:16px 0;border-top:1px solid var(--soft)}.qq{font-weight:600;color:var(--fg);margin-bottom:6px}.aa{white-space:pre-wrap;color:var(--mute)}.aa.load{padding:4px 0}
+.cell{min-height:300px;justify-content:space-between;gap:20px;animation:fade .9s both;animation-delay:calc(var(--i)*.12s + .3s)}
+.cd{color:var(--mute);font-size:.92rem;line-height:1.4;max-width:22ch;transition:color .3s}.cell:hover .cd{color:var(--bg);opacity:.8}
+.gl{display:block;height:46px;position:relative;color:currentColor;font-style:normal}
+.g1 u{display:block;height:1px;background:currentColor;margin:10px 0 0;width:30%;transition:width .6s cubic-bezier(.2,.7,.2,1);text-decoration:none}
+.g1 u:nth-child(2){width:55%;transition-delay:.08s}.g1 u:nth-child(3){width:80%;transition-delay:.16s}.cell:hover .g1 u{width:100%}
+.g2::before{content:"";position:absolute;left:0;top:2px;width:42px;height:42px;border:1px solid currentColor;border-radius:50%}
+.g2::after{content:"";position:absolute;left:18px;top:-1px;width:6px;height:6px;background:currentColor;border-radius:50%;transform-origin:3px 24px;animation:orb 4s linear infinite}
+@keyframes orb{to{transform:rotate(360deg)}}
+.g3::before,.g3::after{content:"";position:absolute;top:8px;width:30px;height:30px;border:1px solid currentColor;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.g3::before{left:0}.g3::after{left:20px}.cell:hover .g3::after{transform:translateX(16px)}
+.g4::before{content:"";position:absolute;left:8px;top:18px;width:10px;height:10px;background:currentColor;border-radius:50%}
+.g4::after{content:"";position:absolute;left:0;top:10px;width:26px;height:26px;border:1px solid currentColor;border-radius:50%;animation:ping 2.2s ease-out infinite}
+@keyframes ping{from{transform:scale(.4);opacity:1}to{transform:scale(1.7);opacity:0}}
+.view .sh{position:relative}
+.view .sh[data-n]::after{content:attr(data-n);position:absolute;right:0;top:-.08em;font-size:clamp(5rem,15vw,13rem);font-weight:500;letter-spacing:-.06em;line-height:.8;color:transparent;-webkit-text-stroke:1px var(--soft);pointer-events:none;animation:fade 1s both}
+#how .steps{grid-template-columns:1fr;border-top:0}
+#how .steps>div,#how .steps>div+div{display:grid;grid-template-columns:minmax(90px,200px) 1fr;column-gap:30px;padding:36px 0;border-top:1px solid var(--line);border-left:0;transition:padding .4s}
+#how .steps>div:hover{padding-left:18px}
+#how .steps span.mono{grid-row:1/3;font-size:clamp(3.2rem,9vw,7rem);letter-spacing:-.06em;font-weight:500;line-height:.9;color:transparent;-webkit-text-stroke:1px var(--fg);transition:color .4s}
+#how .steps>div:hover span.mono{color:var(--fg)}
+#how .steps h3{margin:0 0 10px;font-size:2rem}#how .steps p{max-width:44ch}
+.who article,.who article+article{padding:38px;transition:background .45s,color .45s}
+.who article:hover{background:var(--fg);color:var(--bg)}.who article:hover li{color:var(--bg);border-color:rgba(128,128,128,.4)}
+@media(max-width:820px){.cell{min-height:210px}.who article,.who article+article{padding:26px 20px}#how .steps>div,#how .steps>div+div{grid-template-columns:70px 1fr;column-gap:16px}.view .sh[data-n]::after{opacity:.6}}
+
+.menu{grid-template-columns:1fr;margin-top:84px;border-top:1px solid var(--line);border-bottom:0}
+.cell{position:relative;overflow:hidden;isolation:isolate;display:grid;grid-template-columns:90px 1.25fr 1.1fr 64px 40px;grid-template-areas:"n t d g ar";align-items:center;column-gap:24px;min-height:0;padding:34px 10px;border-left:0;border-top:0;border-bottom:1px solid var(--line);gap:0 24px;background:transparent;transition:color .3s .1s}
+.cell:nth-child(n+3){border-top:0}
+.cell::before{content:"";position:absolute;inset:0;background:var(--fg);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.77,0,.18,1);z-index:-1}
+.cell:hover,.cell:focus-visible{background:transparent;color:var(--bg)}
+.cell:hover::before,.cell:focus-visible::before{transform:scaleX(1)}
+.cell .n{grid-area:n}.cell .t{grid-area:t}.cell .cd{grid-area:d}.cell .gl{grid-area:g;justify-self:end;width:56px}.cell .ar{grid-area:ar;justify-self:end}
+.cell .t{display:block;width:auto;font-weight:500;font-size:clamp(2rem,5vw,4rem);letter-spacing:-.045em;line-height:1;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.cell:hover .t{transform:translateX(14px)}
+.cell .ar{font-size:1.7rem;line-height:1;transition:transform .45s cubic-bezier(.2,.7,.2,1)}.cell:hover .ar{transform:translateX(10px)}
+.cell .cd{max-width:30ch}
+.hl{display:inline-block;vertical-align:middle;margin-left:16px;padding:5px 12px 5px 22px;border:1px solid currentColor;border-radius:999px;font:500 .62rem "Hanken Grotesk",sans-serif;font-style:normal;letter-spacing:.16em;text-transform:uppercase;position:relative;transform:translateY(-.15em)}
+.hl::before{content:"";position:absolute;left:9px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:currentColor;animation:ping2 1.8s ease-in-out infinite}
+@keyframes ping2{50%{opacity:.25;transform:scale(.6)}}
+@media(max-width:820px){.menu{grid-template-columns:1fr;margin-top:56px}.cell{grid-template-columns:44px 1fr 28px;grid-template-areas:"n t ar" "n d ar";row-gap:8px;padding:24px 4px;min-height:0}.cell:nth-child(odd){border-left:0}.cell .gl{display:none}.cell .t{font-size:clamp(1.7rem,8vw,2.4rem)}.hl{margin-left:10px;padding:4px 10px 4px 18px;font-size:.56rem}.hl::before{left:7px}}
+/* Presentation layer: warmer color, clearer hierarchy, and softer surfaces. */
+:root{--bg:#F3F3F0;--fg:#0D0D0D;--mute:#6E6E69;--line:#0D0D0D;--soft:rgba(13,13,13,.16);--card:#FAFAF8;--accent:#0D0D0D;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C0C0B;--fg:#EEEEEA;--mute:#8F8F89;--line:#EEEEEA;--soft:rgba(238,238,234,.18);--card:#141413;--accent:#EEEEEA;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0C0C0B;--fg:#EEEEEA;--mute:#8F8F89;--line:#EEEEEA;--soft:rgba(238,238,234,.18);--card:#141413;--accent:#EEEEEA;color-scheme:dark}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero h1 em,:root:not([data-theme="light"]) .hl{color:var(--fg)}}
+body{font-size:1.02rem;line-height:1.65}
+:root{scrollbar-color:var(--line) var(--bg)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.skip-link{position:fixed;top:10px;left:10px;z-index:100;padding:10px 14px;border-radius:999px;background:var(--fg);color:var(--bg);transform:translateY(-160%);transition:transform .2s}
+.skip-link:focus{transform:none}
+.wrap{max-width:1320px;padding-left:clamp(22px,5vw,72px);padding-right:clamp(22px,5vw,72px)}
+header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);border-color:var(--soft)}
+header.top .wrap{height:74px}
+.logo{letter-spacing:.17em}
+header.top a.nl{font-size:.68rem;letter-spacing:.16em}
+.hero{isolation:isolate;padding:clamp(72px,10vw,132px) 0 0;background:radial-gradient(ellipse at 72% 24%,color-mix(in srgb,var(--fg) 5%,transparent),transparent 42%)}
+.hero h1{font:500 clamp(4.2rem,10.5vw,9.8rem)/.91 "Hanken Grotesk",system-ui,sans-serif;letter-spacing:-.055em;max-width:9.5ch}
+.hero h1 em{font-weight:500;color:var(--fg)}
+:root[data-theme="dark"] .hero h1 em{color:var(--accent)}
+.hero .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:24px;color:var(--mute);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--fg);box-shadow:0 0 0 5px var(--soft)}
+.hero .sub{max-width:44ch;margin-top:28px;color:var(--mute);font-size:clamp(1.05rem,1.55vw,1.25rem);line-height:1.7}
+.hero-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:26px;color:var(--mute);font-size:.8rem}
+.hero-meta b{color:var(--fg);font-weight:600}.hero-meta i{width:4px;height:4px;border-radius:50%;background:var(--fg)}
+.cta{gap:14px;margin-top:30px}
+.btn{padding:15px 24px;border-radius:999px;font-size:.68rem;letter-spacing:.15em}
+.cta .btn:first-child{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.cta .btn:first-child:hover{background:transparent;color:var(--fg)}
+.btn.o{border-color:var(--soft)}.btn.o:hover{border-color:var(--fg)}
+.menu{margin-top:clamp(76px,10vw,124px)}
+.cell{padding:29px 10px;transition:color .3s .1s,transform .35s cubic-bezier(.2,.7,.2,1)}
+.cell::before{border-radius:14px}
+.cell:hover{transform:translateY(-2px)}
+.cell .t{font-size:clamp(2rem,4.2vw,3.6rem)}
+.cell .cd{font-size:.94rem}
+.hl{border-radius:999px;color:var(--fg)}
+:root[data-theme="dark"] .hl{color:var(--accent)}
+.fx{padding:30px 0;background:var(--fg);color:var(--bg);border:0}
+.fx #fx .in{color:color-mix(in srgb,var(--bg) 65%,var(--fg))}
+.fx #fx .out{font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:500}
+section{padding:clamp(76px,9vw,120px) 0}
+.blk{border-color:var(--soft)}
+.sh{margin-bottom:42px}
+.sh h2,.pane h3,.who h3,.note h3{font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:500;letter-spacing:-.035em}
+.sh h2{font-size:clamp(2.5rem,5.8vw,5rem);max-width:13ch;line-height:.98}
+.big{font:500 clamp(2rem,4.7vw,4.1rem)/1.12 "Hanken Grotesk",system-ui,sans-serif;letter-spacing:-.04em;max-width:22ch}
+.notes{gap:14px;border:0}
+.note,.note:not(:nth-child(3n+1)){padding:28px;border:1px solid var(--soft);border-radius:20px;background:var(--card);transition:transform .3s,border-color .3s,box-shadow .3s}
+.note:hover{transform:translateY(-4px);border-color:var(--line);box-shadow:0 18px 40px rgba(0,0,0,.07)}
+.note h3{font-size:1.65rem;line-height:1.08}
+.tbl{border-top:1px solid var(--line)}
+.row{padding:20px 0;border-color:var(--soft)}
+.row b{font-family:"Hanken Grotesk",system-ui,sans-serif;font-weight:500}
+.who{gap:16px;border:0}
+.who article,.who article+article{padding:clamp(24px,4vw,42px);border:1px solid var(--soft);border-radius:20px;background:var(--card)}
+.who article:hover{border-color:var(--fg);border-radius:20px}
+.who h3{font-size:2.3rem}
+.tip{border-color:var(--soft);border-radius:22px;background:var(--card);box-shadow:0 16px 46px rgba(0,0,0,.05)}
+.tip .btn{border-radius:999px}
+details{border-color:var(--soft)}details:first-of-type{border-color:var(--line)}
+summary{font-size:1.22rem}
+.flow{border-color:var(--soft);border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.08)}
+.prog{border-radius:14px;overflow:hidden;border-color:var(--soft)}
+.prog li.on{background:var(--fg);color:var(--bg)}
+.pane h3{font-size:2.5rem}
+.field input,.field select,.addrow input,.join input{border-color:var(--soft);border-radius:12px;background:color-mix(in srgb,var(--card) 74%,transparent)}
+.chip{border-radius:999px;border-color:var(--soft);letter-spacing:.1em}
+.wel{border-color:var(--soft);border-radius:14px;background:color-mix(in srgb,var(--accent) 16%,var(--card))}
+.ai-opt{border-radius:14px}
+.res{border-color:var(--soft)}
+.res h4{font:500 2rem "Hanken Grotesk",system-ui,sans-serif}
+.bar{height:5px;border-radius:99px;overflow:hidden}
+.bar b{border-radius:99px;background:var(--fg)}
+.final{border-color:var(--soft)}
+.final h2{font:500 clamp(3rem,8vw,7.4rem)/.95 "Hanken Grotesk",system-ui,sans-serif;letter-spacing:-.055em;max-width:11ch}
+.join input{min-height:58px}
+footer{border-color:var(--soft)}footer a{text-underline-offset:4px}
+.interest-quiz{margin:18px 0 0;padding:0;border:0;background:transparent}
+.quiz-hero{max-width:860px;margin:0 auto 20px;padding:clamp(28px,5vw,52px);position:relative;overflow:hidden;background:#0D0D0D;color:#F3F3F0}
+.quiz-hero::after{content:"";position:absolute;width:240px;height:240px;right:-82px;top:-108px;border:1px solid rgba(243,243,240,.16);transform:rotate(45deg);pointer-events:none}
+.quiz-hero-top,.quiz-progress-info{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.quiz-hero-top{position:relative;z-index:1;color:rgba(243,243,240,.72)}
+.quiz-hero h2{position:relative;z-index:1;margin:36px 0 16px;max-width:10ch;font:500 clamp(2.8rem,7vw,5.7rem)/.94 "Hanken Grotesk",system-ui,sans-serif;letter-spacing:-.06em}
+.quiz-hero h2 em{color:rgba(243,243,240,.62);font-style:normal}
+.quiz-hero .quiz-intro{position:relative;z-index:1;max-width:48ch;margin:0;color:rgba(243,243,240,.76);font-size:1rem}
+.quiz-progress{position:relative;z-index:1;margin-top:34px}
+.quiz-progress-info{margin-bottom:10px;color:rgba(243,243,240,.76);font-size:.85rem}
+.quiz-progress-info strong{color:#F3F3F0;font-weight:600}
+.quiz-progress-track{height:3px;overflow:hidden;background:rgba(243,243,240,.2)}
+#quiz-progress-fill{display:block;width:0;height:100%;background:#F3F3F0;transition:width .35s ease}
+.quiz-question{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin:16px 0 0;padding:18px;border:1px solid var(--soft);background:var(--card);min-width:0}
+.quiz-question legend{grid-column:1/-1;width:100%;margin-bottom:6px;font-weight:600;font-size:1rem;letter-spacing:-.01em}
+.quiz-question label{display:flex;align-items:flex-start;gap:10px;min-height:56px;padding:13px 14px;border:1px solid var(--soft);cursor:pointer;font-size:.9rem;line-height:1.35;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.quiz-question label:hover{border-color:var(--fg);transform:translateY(-1px)}
+.quiz-question label:has(input:checked){background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.quiz-question input{width:16px;min-width:16px;height:16px;margin:2px 0 0;accent-color:var(--fg)}
+.quiz-question label:has(input:checked) input{accent-color:var(--bg)}
+#quiz-apply:disabled{opacity:.45;cursor:not-allowed}
+.quiz-result{min-height:1.5em;margin-top:14px;font-size:.9rem;color:var(--mute)}
+.quiz-paths{margin-top:24px;padding-top:18px;border-top:1px solid var(--soft)}
+.quiz-paths-title{font-size:1.25rem;line-height:1.15;margin-bottom:8px}
+.quiz-path-note{color:var(--mute);font-size:.88rem}
+.quiz-path{display:grid;grid-template-columns:minmax(150px,.7fr) 1.3fr;gap:8px 20px;padding:16px 0;border-top:1px solid var(--soft)}
+.quiz-path h4{font:500 1.2rem/1.15 "Hanken Grotesk",system-ui,sans-serif;letter-spacing:-.025em;margin-top:5px}
+.quiz-path .cluster{font:500 .65rem "Hanken Grotesk",system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--mute)}
+.quiz-path p{font-size:.9rem;color:var(--mute);margin-top:5px}
+.quiz-path strong{color:var(--fg);font-weight:600}
+.road-title{margin:20px 0 2px;font:500 .72rem "Hanken Grotesk",system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.rd{border-top:0;margin-top:8px}
+.rd li{grid-template-columns:118px 1fr}
+.rd li::before{font-size:.65rem}
+@media(max-width:820px){
+ .hero{padding-top:64px}.hero h1{font-size:clamp(3.8rem,15vw,6rem);max-width:9ch}.hero .eyebrow{font-size:.63rem}
+ .menu{margin-top:60px}.cell{padding:23px 4px}.cell .t{font-size:clamp(1.9rem,8vw,2.8rem)}
+ .notes{grid-template-columns:1fr 1fr}.note,.note:not(:nth-child(3n+1)){padding:22px}
+ .who article,.who article+article{padding:24px}.flow{padding:24px 18px}
+}
+@media(max-width:520px){
+ .hero h1{font-size:clamp(3.4rem,15vw,4.8rem)}.cta .btn{padding:14px 18px}
+ .notes{grid-template-columns:1fr}.note,.note:not(:nth-child(3n+1)){padding:24px}
+ .cell{grid-template-columns:36px 1fr 26px;column-gap:12px}
+ .quiz-question{grid-template-columns:1fr}
+ .quiz-hero h2{margin-top:28px;font-size:clamp(2.8rem,14vw,4rem)}
+ .quiz-progress{margin-top:26px}
+ .quiz-question{padding:14px}
+ .quiz-path{grid-template-columns:1fr;gap:2px}
+ .fx .wrap{gap:8px}.fx .out{font-size:2rem}
+ .account-action{align-items:flex-start;flex-direction:column;margin:0 0 22px}
+}
+@media(prefers-reduced-motion:reduce){.cell,.note{transition:none}.note:hover,.cell:hover{transform:none}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#top">Skip to content</a>
+<header class="top"><div class="wrap"><a class="logo" href="#top">VERTEZ</a><nav aria-label="Main"><a class="nl" href="#how">Method</a><a class="nl" href="#quiz">Interests quiz</a><a class="nl" href="#try">Advisor</a><a class="nl" href="#join">Access</a></nav></div></header>
+
+<main id="top">
+<div class="hero"><canvas id="sp" aria-hidden="true"></canvas><div class="wrap">
+<p class="eyebrow"><i aria-hidden="true"></i>A more personal way to plan your career</p>
+<h1>Career advice, <em>formulated</em> for you.</h1>
+<p class="sub">Turn your skills, interests and ambitions into career paths you can explore—and a practical next step you can take this week.</p>
+<div class="cta"><a class="btn" href="#try">Find my path</a><a class="btn o" href="#quiz">Take the interests quiz</a><a class="btn o" href="#how">How it works</a></div>
+<p class="hero-meta"><span><b>140</b> curated career profiles</span><i aria-hidden="true"></i><span>Skills-first matching</span><i aria-hidden="true"></i><span>AI advice is optional</span></p>
+<div class="menu">
+<button class="cell" type="button" data-v="how" style="--i:0"><span class="mono n">01</span><b class="t">Method</b><span class="cd">Three steps from profile to paths</span><i class="gl g1"><u></u><u></u><u></u></i><span class="ar">→</span></button>
+<button class="cell hot" type="button" data-v="try" style="--i:1"><span class="mono n">02</span><b class="t">Advisor<em class="hl">Start here</em></b><span class="cd">Get your ranked career paths</span><i class="gl g2"></i><span class="ar">→</span></button>
+<button class="cell" type="button" data-v="quiz" style="--i:2"><span class="mono n">03</span><b class="t">Interests quiz</b><span class="cd">Find what kind of work pulls you in</span><i class="gl g3"></i><span class="ar">→</span></button>
+<button class="cell" type="button" data-v="who" style="--i:3"><span class="mono n">04</span><b class="t">Who it’s for</b><span class="cd">Students and working professionals</span><i class="gl g4"></i><span class="ar">→</span></button>
+<button class="cell" type="button" data-v="join" style="--i:4"><span class="mono n">05</span><b class="t">Early access</b><span class="cd">Join the list for launch updates</span><i class="gl g5"></i><span class="ar">→</span></button>
+</div>
+</div></div>
+<div class="fx"><div class="wrap"><span class="mono">Example formula</span><div id="fx"><span class="in"></span><span class="out"></span></div></div></div>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Why Vertez</span><span></span></div><p class="big rv">Most career advice starts with a job title. Vertez starts with you: what you can already do, what you care about and where you want to go. Then it works outward.</p></div></section>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Good to know</span><h2>Six ideas worth carrying.</h2></div>
+<div class="notes rv">
+<div class="note"><span class="mono">01</span><h3>Skills travel further than titles.</h3><p>A job title describes one role. A skill can work in dozens of them.</p></div>
+<div class="note"><span class="mono">02</span><h3>Interests are data.</h3><p>What you read, build and talk about without being asked points somewhere real.</p></div>
+<div class="note"><span class="mono">03</span><h3>Small experiments win.</h3><p>A weekend project can teach you more than a month of deciding.</p></div>
+<div class="note"><span class="mono">04</span><h3>Direction beats certainty.</h3><p>You don’t need the final answer. You need a good next step.</p></div>
+<div class="note"><span class="mono">05</span><h3>People are part of the path.</h3><p>Mentors and peers open doors that applications alone rarely do.</p></div>
+<div class="note"><span class="mono">06</span><h3>Fit grows as you do.</h3><p>The right path today can change, and your plan is allowed to change with it.</p></div>
+</div></div></section>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Fields</span><h2>Fields many people are exploring.</h2></div>
+<div class="tbl rv">
+<div class="row h"><span class="mono">Field</span><span class="mono">What it involves</span><span class="mono">Skills that help</span></div>
+<div class="row"><b>AI and data</b><span>Building and applying systems that learn from data</span><span>Python, statistics, clear writing</span></div>
+<div class="row"><b>Climate and energy</b><span>Measuring and cutting emissions, building cleaner systems</span><span>Data analysis, engineering, policy</span></div>
+<div class="row"><b>Health and biotech</b><span>Research, devices and digital care</span><span>Biology, data, communication</span></div>
+<div class="row"><b>Cybersecurity</b><span>Protecting systems and people from attack</span><span>Networking, scripting, curiosity</span></div>
+<div class="row"><b>Product and design</b><span>Shaping tools that people enjoy using</span><span>Design, research, writing</span></div>
+<div class="row"><b>Finance and fintech</b><span>Money, markets and the software behind them</span><span>Finance, Python, speaking</span></div>
+<div class="row"><b>Education and learning</b><span>Designing how people learn</span><span>Teaching, design, writing</span></div>
+<div class="row"><b>Design and media</b><span>Creating products, stories and visual experiences</span><span>Design, research, writing</span></div>
+<div class="row"><b>Engineering and the built world</b><span>Designing, building and maintaining physical systems</span><span>Engineering, CAD, project management</span></div>
+<div class="row"><b>Law and public service</b><span>Helping people and institutions solve shared problems</span><span>Research, writing, facilitation</span></div>
+<div class="row"><b>Food, travel and hospitality</b><span>Creating experiences and coordinating service</span><span>Operations, communication, planning</span></div>
+</div></div></section>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Myth or reality</span><h2>Four things people get wrong.</h2></div>
+<div class="tbl rv">
+<div class="row two h"><span class="mono">Myth</span><span class="mono">Reality</span></div>
+<div class="row two"><b>“My degree decides my career.”</b><span>A degree opens doors, but skills, projects and curiosity decide where you go next.</span></div>
+<div class="row two"><b>“I need to be certain before I start.”</b><span>Direction comes from trying things. Small experiments beat long deliberation.</span></div>
+<div class="row two"><b>“Changing fields means starting over.”</b><span>Skills like analysis, writing and leading carry across almost every field.</span></div>
+<div class="row two"><b>“Passion should pick the job.”</b><span>Interest matters, but so do your skills, your people and the daily work itself.</span></div>
+</div></div></section>
+
+<section class="blk"><div class="wrap"><div class="tip rv"><span class="mono">A thought for today</span><div><p id="tip" aria-live="polite"></p><button class="btn" type="button" id="tipb">Another one</button></div></div></div></section>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Questions</span><h2>Good questions, short answers.</h2></div>
+<div class="rv">
+<details><summary>Who is Vertez for?</summary><p>Students choosing a direction, and working professionals who want to grow or switch fields.</p></details>
+<details><summary>What do I need to start?</summary><p>A few minutes. You share your stage and goal, then add the skills and interests you already have.</p></details>
+<details><summary>How are my paths chosen?</summary><p>Vertez compares your skills, interests, goal and field with a broad career catalog, then ranks the closest paths and shows strengths, gaps and a practical first move. Fit scores are comparisons, not hiring odds.</p></details>
+<details><summary>Is my information private?</summary><p>Your profile is saved in this browser. When Supabase is configured, a private anonymous account tied to this browser also stores it. Optional AI advice sends your stage, goal, field, skills, interests and follow-up questions to Claude; your name and email are not included. Account protection uses Cloudflare Turnstile. Read the <a href="./privacy.html">privacy policy</a>.</p></details>
+<details><summary>Can I change my answers?</summary><p>Yes. Edit them or start over at any time from the results screen.</p></details>
+</div></div></section>
+
+<section class="blk"><div class="wrap"><div class="sh rv"><span class="mono">Begin</span><h2>Ready when you are.</h2></div><div class="cta rv"><button class="btn" type="button" data-v="try">Open the advisor</button><button class="btn o" type="button" data-v="quiz">Take the interests quiz</button><button class="btn o" type="button" data-v="join">Join early access</button></div></div></section>
+
+<section class="view" id="how" aria-label="Method"><div class="wrap">
+<div class="sh rv" data-n="01"><span class="mono">Method</span><h2>Three steps. A clearer direction.</h2></div>
+<div class="steps rv">
+<div><span class="mono">01</span><h3>Tell us about you</h3><p>Your stage, your field and what you want most.</p></div>
+<div><span class="mono">02</span><h3>Add what you carry</h3><p>Skills you’ve gathered and subjects that pull you. Type your own if it isn’t listed.</p></div>
+<div><span class="mono">03</span><h3>Receive your paths</h3><p>Ranked careers, the gaps to close and one move for this week.</p></div>
+</div></div></section>
+
+<section class="view" id="quiz" aria-label="Interests quiz"><div class="wrap">
+<div class="quiz-hero rv">
+<div class="quiz-hero-top"><span class="mono">INTERESTS / SELF DISCOVERY</span><span class="mono">60 SEC</span></div>
+<h2>Find what pulls <em>you in.</em></h2>
+<p class="quiz-intro">Pick what feels energizing, not what you think you should choose. Answer any three or more. There are no wrong answers.</p>
+<div class="quiz-progress" aria-live="polite">
+<div class="quiz-progress-info"><span id="quiz-progress-label">Answer at least 3 of 5 to see your results.</span><strong id="quiz-progress-count">0 / 5</strong></div>
+<div class="quiz-progress-track" aria-hidden="true"><span id="quiz-progress-fill"></span></div>
+</div>
+</div>
+<div class="flow rv">
+<div class="interest-quiz" id="interest-quiz">
+<fieldset class="quiz-question"><legend>1. You get a free hour. What do you reach for?</legend>
+<label><input type="radio" name="iq1" data-tags="Making things|Product building|Engineering"><span>Make, fix, or improve something</span></label>
+<label><input type="radio" name="iq1" data-tags="Data|Science|Mathematics"><span>Solve a puzzle or spot a pattern</span></label>
+<label><input type="radio" name="iq1" data-tags="Health|Human behavior|Community"><span>Help someone work through a problem</span></label>
+<label><input type="radio" name="iq1" data-tags="Design|Storytelling|Media"><span>Create a story, design, or experience</span></label>
+</fieldset>
+<fieldset class="quiz-question"><legend>2. Which problem would you choose to tackle?</legend>
+<label><input type="radio" name="iq2" data-tags="Business|Technology|Transportation"><span>A process that wastes people’s time</span></label>
+<label><input type="radio" name="iq2" data-tags="Community|Health|People and culture"><span>Someone can’t find the support they need</span></label>
+<label><input type="radio" name="iq2" data-tags="Climate|Wildlife|Outdoors"><span>A place or species needs protecting</span></label>
+<label><input type="radio" name="iq2" data-tags="Education|Storytelling|Design"><span>A useful idea is hard to understand</span></label>
+</fieldset>
+<fieldset class="quiz-question"><legend>3. What finished result would make you proud?</legend>
+<label><input type="radio" name="iq3" data-tags="Software|Product building|Consumer technology"><span>A tool that makes one task easier</span></label>
+<label><input type="radio" name="iq3" data-tags="Architecture and places|Making things|Design"><span>A space or object that works better</span></label>
+<label><input type="radio" name="iq3" data-tags="Education|Children's learning|Human behavior"><span>A person learns or feels more capable</span></label>
+<label><input type="radio" name="iq3" data-tags="Science|Data|Research"><span>A clear answer backed by evidence</span></label>
+</fieldset>
+<fieldset class="quiz-question"><legend>4. Who or what would you most like your work to help?</legend>
+<label><input type="radio" name="iq4" data-tags="Business|Entrepreneurship|Finance"><span>A small team trying to build something</span></label>
+<label><input type="radio" name="iq4" data-tags="Education|Children's learning|Community"><span>Learners finding their way</span></label>
+<label><input type="radio" name="iq4" data-tags="Health|Social impact|Justice"><span>People facing a difficult situation</span></label>
+<label><input type="radio" name="iq4" data-tags="Climate|Government|Urban life"><span>A neighborhood or the environment</span></label>
+</fieldset>
+<fieldset class="quiz-question"><legend>5. Which kind of day sounds best?</legend>
+<label><input type="radio" name="iq5" data-tags="Data|Technology|Mathematics"><span>Work with numbers, systems, or tools</span></label>
+<label><input type="radio" name="iq5" data-tags="People and culture|Community|Events"><span>Coach, organize, or bring people together</span></label>
+<label><input type="radio" name="iq5" data-tags="Engineering|Construction|Making things"><span>Sketch, build, or repair something</span></label>
+<label><input type="radio" name="iq5" data-tags="Storytelling|Design|Music"><span>Write, design, or perform</span></label>
+</fieldset>
+<p class="err" id="quiz-error" role="alert"></p>
+<button class="btn o" type="button" id="quiz-apply" disabled>Answer at least 3 questions</button>
+<p class="quiz-result" id="quiz-result" role="status" aria-live="polite"></p>
+<div class="quiz-paths" id="quiz-paths" role="region" aria-labelledby="quiz-paths-title" aria-live="polite" hidden>
+<h3 class="quiz-paths-title" id="quiz-paths-title">Career paths to explore</h3>
+<p class="quiz-path-note">These are starting points from your interests alone. Add your skills in the advisor for a more personal ranking.</p>
+<div id="quiz-path-list"></div>
+</div>
+</div>
+<div class="nav"><span></span><button class="btn" type="button" data-v="try">Continue to your profile</button></div>
+</div></div></section>
+
+<section class="view" id="try" aria-label="Advisor"><div class="wrap">
+<div class="sh rv" data-n="02"><span class="mono">Advisor</span><h2>Tell Vertez about you.</h2></div>
+<div class="flow rv" id="flow">
+<ol class="prog" id="prog"><li class="on">01 About you</li><li>02 Skills</li><li>03 Your paths</li></ol>
+<div class="account-action" id="account-actions" hidden><span id="account-status" role="status"></span><button type="button" id="delete-data">Delete account &amp; all data</button></div>
+<div id="wel" class="wel" hidden>Welcome back. Your saved answers have been restored.</div>
+
+<div class="pane" id="p1">
+<h3>About you</h3><p class="hint">Your stage, goal and field help rank the paths. Your profile is saved in this browser and, when configured, to a private account tied to this browser.</p>
+<div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="given-name"></div>
+<div class="field"><label id="l-seg">Where are you right now</label><div class="seg" id="seg" role="group" aria-labelledby="l-seg"><button class="chip" type="button" data-v="Student" aria-pressed="false">Student</button><button class="chip" type="button" data-v="Working professional" aria-pressed="false">Working professional</button></div></div>
+<div class="two">
+<div class="field"><label for="f-stage">Stage</label><select id="f-stage" disabled><option value="">Choose above first</option></select></div>
+<div class="field"><label for="f-goal">What you want most</label><select id="f-goal"><option value="direction">Find a direction</option><option value="switch">Switch fields</option><option value="grow">Grow in my field</option></select></div>
+</div>
+<div class="field"><label for="f-field" id="l-field">Field of study or current role</label><input id="f-field" type="text"></div>
+<p class="err" id="e1" role="alert"></p>
+<div class="nav"><span></span><button class="btn" type="button" id="n1">Continue</button></div>
+</div>
+
+<div class="pane" id="p2" hidden>
+<h3>What can you do?</h3><p class="hint">Skills you already have, from class, work or side projects. Search the list, tap to choose, or type your own.</p>
+<p class="hint" id="catalog-count"></p>
+<div class="field"><label for="skill-search">Find a skill</label><input id="skill-search" type="search" placeholder="Search skills, e.g. research or Python" autocomplete="off"><p class="hint" id="skill-count" aria-live="polite"></p></div>
+<div class="chips" id="skills"></div>
+<div class="addrow"><input id="c-sk" type="text" placeholder="Add a skill, then press Enter" aria-label="Add your own skill"><button class="btn o" type="button" id="a-sk">Add</button></div>
+<h3>What pulls you?</h3><p class="hint">Choose interests yourself, or <a href="#quiz">take the 60-second interests quiz</a> to get suggestions first.</p>
+<div class="field"><label for="interest-search">Find an interest</label><input id="interest-search" type="search" placeholder="Search interests, e.g. climate or games" autocomplete="off"><p class="hint" id="interest-count" aria-live="polite"></p></div>
+<div class="chips" id="ints"></div>
+<div class="addrow"><input id="c-in" type="text" placeholder="Add an interest, then press Enter" aria-label="Add your own interest"><button class="btn o" type="button" id="a-in">Add</button></div>
+<div class="wel ai-opt" id="ai-option" hidden><label for="ai-consent" style="display:flex;align-items:flex-start;gap:12px;color:var(--fg);font-size:.95rem;letter-spacing:0;text-transform:none"><input id="ai-consent" type="checkbox" style="width:18px;height:18px;flex:0 0 auto;margin:3px 0 0"><span><strong>Use optional AI advice</strong><br><span style="color:var(--mute)">Your stage, goal, field, skills, interests and follow-up questions will be sent to Claude. Your name and email are not included.</span></span></label></div>
+<p class="err" id="e2" role="alert"></p>
+<div class="nav"><button class="btn o" type="button" id="b2">Back</button><button class="btn" type="button" id="n2">Reveal my paths</button></div>
+</div>
+
+<div class="pane" id="p3" hidden>
+<h3 id="sum-h"></h3><p class="hint" id="sum-p"></p>
+<div id="out" aria-live="polite"></div>
+<div class="ask" id="ask" hidden><label class="mono" for="q">Ask a follow-up</label><div class="addrow"><input id="q" type="text" maxlength="200" placeholder="e.g. What should I learn first for the top path?"><button class="btn o" type="button" id="qb">Ask</button></div><div id="qa" aria-live="polite"></div></div>
+<p class="hint" id="noted" style="margin-top:20px"></p>
+<div class="nav"><button class="btn o" type="button" id="edit">Edit my answers</button><button class="btn o" type="button" id="reset">Start over</button></div>
+</div>
+</div>
+</div></section>
+
+<section class="view" id="who" aria-label="Who it is for"><div class="wrap">
+<div class="sh rv" data-n="04"><span class="mono">For</span><h2>Both ends of a career.</h2></div>
+<div class="who rv">
+<article><h3>Students</h3><ul><li>Choose a major or first role with evidence</li><li>See which skills to build before graduation</li><li>Compare paths side by side</li></ul></article>
+<article><h3>Working professionals</h3><ul><li>Find roles that reuse what you do well</li><li>Spot the smallest gap to a new field</li><li>Get a plan you can start this week</li></ul></article>
+</div></div></section>
+
+<section class="view final" id="join" aria-label="Early access"><div class="wrap">
+<span class="mono rv">Early access</span>
+<h2 class="rv" style="margin-top:22px">Be first to find your way.</h2>
+<div class="join rv"><input id="em" type="email" placeholder="your@email.com" aria-label="Email address"><button class="btn" id="go">Join the list</button></div>
+<p class="msg" id="msg" role="status"></p>
+</div></section>
+</main>
+<div id="vbar" role="navigation" aria-label="Sections"><span class="logo" style="cursor:pointer">VERTEZ</span><div class="tabs"><button type="button" data-v="how">Method</button><button type="button" data-v="try">Advisor</button><button type="button" data-v="quiz">Quiz</button><button type="button" data-v="who">For</button><button type="button" data-v="join">Access</button></div><button type="button" id="vx" aria-label="Close and return to the first page">Close ✕</button></div>
+<footer><div class="wrap mono"><span>© 2026 Vertez</span><span><a href="./privacy.html">Privacy</a> · Career advice, formulated for you</span></div></footer>
+
+<div id="turnstile-container" class="turnstile-host" aria-hidden="true"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./supabase-config.js"></script>
+<script>
+(function(){
+var reduce=window.matchMedia("(prefers-reduced-motion:reduce)").matches;
+function $(i){return document.getElementById(i)}
+function lc(s){return s.toLowerCase()}
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll(".rv").forEach(function(e,i){e.style.setProperty("--d",(i%3)*.08+"s");io.observe(e)});
+var FX=[["Python + Design + AI","Product Designer"],["Biology + Sales + Health","Health Tech Founder"],["Finance + Python + Money","Quant Analyst"],["Teaching + Design + Writing","Learning Designer"],["Data analysis + Climate + Python","Climate Data Analyst"]],fi=0,fx=$("fx");
+function fxSet(){fx.querySelector(".in").textContent=FX[fi][0]+"  →";fx.querySelector(".out").textContent=FX[fi][1]}
+fxSet();if(!reduce)setInterval(function(){fx.classList.add("o");setTimeout(function(){fi=(fi+1)%FX.length;fxSet();fx.classList.remove("o")},450)},3200);
+var TIPS=['Try a career for a weekend before you commit to it for years: shadow someone, build a small project or take a short course.','Skills you use without noticing, like explaining things clearly, are often the ones that matter most.','When two paths tie, pick the one that keeps more doors open.','Ask three people in a role you like what their worst day looks like. It tells you more than a job description.','A few finished projects beat a long list of half-started ones.','Interest often grows with effort. Give a new field a fair ninety days before you judge it.','Write down what energised you this month and what drained you. Patterns show up fast.','Switching fields rarely means starting over. Most of your skills come with you.','Share what you build while you build it. Opportunities find people who are visible.','A mentor doesn’t have to be senior. Someone two years ahead remembers the path best.','Salary is one input, not the whole formula. Weigh learning, people and autonomy too.','Plan the next six months, not the next sixty years.'];
+var tp=$('tip'),ti=-1;function tipSet(){var n;do{n=Math.floor(Math.random()*TIPS.length)}while(n===ti);ti=n;tp.textContent=TIPS[n]}tipSet();
+$('tipb').onclick=function(){if(reduce){tipSet();return}tp.classList.add('o');setTimeout(function(){tipSet();tp.classList.remove('o')},300)};
+var VIEWS=['how','try','quiz','who','join'],cur=null,vb=$('vbar');
+function openV(id){if(VIEWS.indexOf(id)<0)return;VIEWS.forEach(function(v){$(v).classList.toggle('open',v===id)});cur=id;vb.classList.add('on');document.body.classList.add('lock');
+[].forEach.call(vb.querySelectorAll('.tabs button'),function(b){if(b.getAttribute('data-v')===id)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
+var el=$(id);el.scrollTop=0;setTimeout(function(){el.querySelectorAll('.rv').forEach(function(x){x.classList.add('in')})},250);$('vx').focus({preventScroll:true})}
+function closeV(){VIEWS.forEach(function(v){$(v).classList.remove('open')});vb.classList.remove('on');document.body.classList.remove('lock');cur=null}
+document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"],[data-v]');if(!a)return;var id=a.getAttribute('data-v')||a.getAttribute('href').slice(1);if(VIEWS.indexOf(id)>-1){e.preventDefault();openV(id)}else if(a.getAttribute('href')==='#top'){e.preventDefault();closeV();scrollTo(0,0)}});
+$('vx').onclick=closeV;vb.querySelector('.logo').onclick=closeV;
+addEventListener('keydown',function(e){if(e.key==='Escape'&&cur)closeV()});
+if(VIEWS.indexOf(location.hash.slice(1))>-1)openV(location.hash.slice(1));
+(function(){var cv=$('sp'),cx=cv.getContext('2d'),hero=cv.parentNode,W,H,S=[],O=[],mx=-9999,my=-9999,sh=null,run=true,looping=false,dpr=Math.min(2,devicePixelRatio||1);
+function ink(){return getComputedStyle(document.documentElement).getPropertyValue('--fg').trim()}
+function size(){var r=hero.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0);S=[];var n=Math.min(130,Math.round(W*H/9000));for(var i=0;i<n;i++)S.push({x:Math.random()*W,y:Math.random()*H,z:Math.random()*.9+.1,t:Math.random()*6});O=[];var m=Math.min(W,900),px=W*(W>820?.7:.5),py=H*.36;for(var k=0;k<4;k++){var a=m*(.2+k*.16);O.push({a:a,b:a*(.3+k*.04),rot:-.35+k*.07,sp:(.00025+k*.00007)*(k%2?-1:1),ph:Math.random()*6.28,cx:px,cy:py})}}
+function frame(t){cx.clearRect(0,0,W,H);var c=ink();cx.strokeStyle=c;cx.fillStyle=c;cx.lineWidth=1;
+O.forEach(function(o){cx.globalAlpha=.14;cx.beginPath();cx.ellipse(o.cx,o.cy,o.a,o.b,o.rot,0,6.283);cx.stroke();var th=o.ph+t*o.sp*2,cr=Math.cos(o.rot),sr=Math.sin(o.rot),x=o.cx+o.a*Math.cos(th)*cr-o.b*Math.sin(th)*sr,y=o.cy+o.a*Math.cos(th)*sr+o.b*Math.sin(th)*cr;cx.globalAlpha=.9;cx.beginPath();cx.arc(x,y,3,0,6.283);cx.fill();cx.globalAlpha=.28;cx.beginPath();cx.arc(x,y,9,0,6.283);cx.stroke()});
+for(var i=0;i<S.length;i++){var s=S[i];if(!reduce){s.x+=.05+s.z*.12;if(s.x>W)s.x=0}cx.globalAlpha=(.15+.5*Math.abs(Math.sin(t/1100+s.t)))*s.z;cx.beginPath();cx.arc(s.x,s.y,s.z*1.5,0,6.283);cx.fill();
+var dx=s.x-mx,dy=s.y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<140){cx.globalAlpha=(1-d/140)*.45;cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(mx,my);cx.stroke()}
+if(s.z>.5)for(var j=i+1;j<S.length;j++){var q=S[j];if(q.z<=.5)continue;var ex=s.x-q.x,ey=s.y-q.y,e=Math.sqrt(ex*ex+ey*ey);if(e<70){cx.globalAlpha=(1-e/70)*.16;cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(q.x,q.y);cx.stroke()}}}
+if(!reduce){if(!sh&&Math.random()<.004)sh={x:Math.random()*W*.8,y:Math.random()*H*.35,l:0};if(sh){var g=cx.createLinearGradient(sh.x,sh.y,sh.x-90,sh.y-40);g.addColorStop(0,c);g.addColorStop(1,'transparent');cx.globalAlpha=1-sh.l/45;cx.strokeStyle=g;cx.beginPath();cx.moveTo(sh.x,sh.y);cx.lineTo(sh.x-90,sh.y-40);cx.stroke();sh.x+=15;sh.y+=6.5;if(++sh.l>45)sh=null}}
+cx.globalAlpha=1;if(!reduce&&run)requestAnimationFrame(frame);else looping=false}
+function start(){if(!looping){looping=true;requestAnimationFrame(frame)}}
+hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});hero.addEventListener('pointerleave',function(){mx=my=-9999});
+var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){size();if(reduce)frame(0)},150)});
+new IntersectionObserver(function(es){run=es[0].isIntersecting;if(run&&!reduce)start()}).observe(hero);
+size();if(reduce)frame(0);else start()})();
+var SK=["Python","JavaScript","SQL","Data analysis","Statistics","Machine learning","AI prototyping","Software development","Web development","Cloud computing","Cybersecurity","Networking","UX research","Product design","Visual design","Graphic design","Writing","Editing","Public speaking","Research","Critical thinking","Project management","Product management","Leadership","Teamwork","Teaching","Coaching","Customer service","Sales","Negotiation","Marketing","SEO","Social media","Financial modeling","Accounting","Budgeting","Business analysis","Operations","Supply chain","People operations","Policy analysis","Legal research","Biology","Chemistry","Physics","Lab techniques","Clinical care","Patient communication","Psychology","Counseling","Mechanical design","Electrical systems","CAD","Robotics","Construction","GIS","Environmental science","Sustainability","Video production","Photography","Animation","Content strategy","Instructional design","Facilitation","Languages","Event planning","Food preparation","Agriculture","Quality assurance","Mediation","Grant writing","Community outreach","Emergency response","Maintenance","Entrepreneurship","User support","Database design","Public health","Regulatory compliance","Market research","Financial planning","Real estate analysis","Architecture","Industrial design","Audio production","Data visualization","Agile delivery","Experimentation","Finance","Fashion","Music performance"];
+var IN=["AI","Data","Software","Cybersecurity","Games","Product building","Design","Human behavior","Education","Children's learning","Health","Mental health","Biology","Medicine","Climate","Clean energy","Wildlife","Food systems","Finance","Investing","Entrepreneurship","Marketing","Storytelling","Media","Music","Film","Fashion","Sports","Law","Public policy","Justice","Community","Travel","Languages","Architecture","Making things","Robotics","Space","Chemistry","Engineering","Logistics","People and culture","Real estate","Hospitality","History","Social impact","Outdoors","Food","Animals","Government","Research","Construction","Urban life","Energy","Agriculture","Consumer technology","Sports and performance","Mental wellness","Economic development","Workplace","Public safety","Architecture and places","Beauty","Events","Retail","Transportation","Human rights","Government services","Business","Technology","Water","Science","Mathematics","Manufacturing"];
+function career(id,title,cluster,skills,interests,move,watch,keywords){return{id:id,title:title,cluster:cluster,skills:skills.split("|"),interests:interests.split("|"),move:move,watch:watch,keywords:(keywords||"").split("|").filter(Boolean)}}
+var C=[
+career("data-analyst","Data Analyst","Technology & data","SQL|Data analysis|Statistics|Data visualization|Writing","Data|Business|Research","Take a public dataset, answer one practical question and explain the result in a single chart.","Some roles are mostly reporting; check how much analysis and decision-making the team actually owns.","analytics|excel|reporting"),
+career("bi-analyst","Business Intelligence Analyst","Technology & data","SQL|Data analysis|Data visualization|Business analysis","Data|Business|Finance","Recreate one useful business metric in a small dashboard and document how you defined it.","Dashboard tools vary by employer; clear metric definitions matter more than a particular brand.","BI|dashboard|reporting"),
+career("data-scientist","Data Scientist","Technology & data","Python|Statistics|Data analysis|Machine learning|Research","Data|AI|Research","Build a small prediction project and compare it with a simple baseline.","Many jobs need strong statistics and domain knowledge, not just machine learning tools.","analytics|modeling"),
+career("data-engineer","Data Engineer","Technology & data","Python|SQL|Database design|Cloud computing|Software development","Data|Software|Product building","Create a small pipeline that cleans public data and loads it into a database.","Production systems require reliability, monitoring and careful handling of data access.","pipelines|databases"),
+career("ml-engineer","Machine Learning Engineer","Technology & data","Python|Machine learning|Software development|Statistics|Cloud computing","AI|Data|Software","Ship a small model behind a tested API and write down how you would monitor it.","Model quality, data quality and deployment work all matter; demos alone do not show production readiness.","AI|modeling"),
+career("ai-app-developer","AI Application Developer","Technology & data","Software development|Python|AI prototyping|Critical thinking|Product management","AI|Software|Product building","Build a narrow AI feature with clear success criteria and test it against 20 real examples.","The field changes quickly; durable software, evaluation and privacy skills outlast tool-specific tricks.","AI|LLM|automation"),
+career("ai-product-specialist","AI Product Specialist","Technology & data","Product management|AI prototyping|Research|Writing|Data analysis","AI|Product building|Human behavior","Choose one repetitive user task, prototype an AI-assisted flow and test it with three people.","Good judgment about limits, privacy and when not to use AI is part of the job.","AI|product"),
+career("software-engineer","Software Engineer","Technology & data","Software development|JavaScript|Python|Critical thinking|Teamwork","Software|Product building|Games","Build and publish a small tool that solves a problem you personally understand.","Most roles include code review, maintenance and teamwork alongside new feature work.","programming|computer science"),
+career("frontend-developer","Frontend Developer","Technology & data","JavaScript|Web development|Visual design|Software development|UX research","Software|Design|Product building","Recreate one responsive page and make its keyboard and mobile interactions work well.","Frontend roles value accessibility and performance as much as visual polish.","web|user interface|UI"),
+career("backend-developer","Backend Developer","Technology & data","Software development|Python|SQL|Database design|Cybersecurity","Software|Data|Product building","Design a small API with input validation, useful errors and a few documented endpoints.","Reliability, security and data modeling are central parts of day-to-day work.","server|API"),
+career("mobile-developer","Mobile App Developer","Technology & data","Software development|JavaScript|UX research|Quality assurance","Software|Consumer technology|Product building","Build a simple mobile prototype and ask five people to complete one task with it.","Platform-specific tools are useful, but product sense and testing matter across platforms.","apps|iOS|Android"),
+career("cyber-analyst","Cybersecurity Analyst","Technology & data","Cybersecurity|Networking|Critical thinking|Writing|Research","Cybersecurity|Software|Public safety","Complete a legal beginner security lab and write a clear incident summary.","Many roles expect hands-on labs, careful documentation and continuous learning.","security|infosec"),
+career("cloud-engineer","Cloud Engineer","Technology & data","Cloud computing|Networking|Software development|Cybersecurity|Operations","Software|Data|Engineering","Deploy a small service, set a budget alert and document its access controls.","Cloud costs and security can grow quickly; operational care is part of the work.","infrastructure|DevOps"),
+career("network-admin","Network Administrator","Technology & data","Networking|Cybersecurity|User support|Operations","Software|Cybersecurity|Public safety","Map a home or lab network and explain how you would isolate a failing device.","Some positions include on-call support and hands-on equipment maintenance.","IT|systems"),
+career("it-support","IT Support Specialist","Technology & data","User support|Networking|Cybersecurity|Writing|Teamwork","Software|People and culture|Consumer technology","Write a troubleshooting guide for a common setup problem and test it with a new user.","The work can be interruption-heavy, but it builds broad systems and communication skills.","help desk|technical support"),
+career("qa-engineer","Quality Assurance Engineer","Technology & data","Quality assurance|Software development|Critical thinking|Writing|JavaScript","Software|Games|Product building","Create a concise test plan for a small app and automate one repeated check.","Some teams separate testing from development; ask how quality decisions are shared.","testing|automation"),
+career("ux-researcher","UX Researcher","Technology & data","UX research|Research|Facilitation|Writing|Critical thinking","Human behavior|Design|Product building","Run three short usability sessions and turn observations into prioritized product changes.","Research influence depends on team access and how decisions are made.","user research|product"),
+career("product-designer","Product Designer","Design & media","Product design|UX research|Visual design|Writing|Product management","Design|Human behavior|Product building","Improve one confusing product flow and explain the evidence behind each change.","The role balances user needs, business goals and technical constraints.","UX|UI|interface"),
+career("product-manager","Product Manager","Business & finance","Product management|Research|Writing|Data analysis|Facilitation","Product building|Human behavior|Technology","Interview users about one problem and write a one-page product brief with a measurable outcome.","Product managers influence work through alignment and trade-offs, often without direct authority.","product|strategy"),
+career("technical-writer","Technical Writer","Design & media","Writing|Editing|Research|Software development|Facilitation","Software|Education|Storytelling","Rewrite one confusing setup guide and ask a newcomer to follow it without help.","Some roles require learning complex products and coordinating with busy subject experts.","documentation|content"),
+career("game-developer","Game Developer","Technology & data","Software development|JavaScript|Quality assurance|Visual design","Games|Software|Making things","Finish a tiny game loop with one mechanic and share it for playtesting.","The games industry can be competitive and project schedules may be demanding.","game programming"),
+career("game-designer","Game Designer","Design & media","Research|Writing|Product design|Data analysis|Facilitation","Games|Human behavior|Storytelling","Prototype a small game rule and observe where first-time players get stuck.","Design work is iterative; a fun concept still needs testing, balance and production constraints.","gameplay|level design"),
+career("robotics-engineer","Robotics Engineer","Engineering & built world","Robotics|Python|Electrical systems|Mechanical design|Software development","Robotics|Engineering|Making things","Make a sensor trigger a simple movement and record what fails during repeated trials.","Robotics combines software and hardware, so projects often need access to equipment.","automation|mechatronics"),
+career("database-admin","Database Administrator","Technology & data","SQL|Database design|Cybersecurity|Cloud computing|Operations","Data|Software|Business","Set up a small database, back it up and test a restore from that backup.","Production database work carries significant reliability and data-protection responsibility.","data systems|DBA"),
+career("gis-analyst","GIS Analyst","Science & environment","GIS|Data analysis|Research|Data visualization","Climate|Urban life|Outdoors","Map one local issue with open geographic data and explain the limits of the dataset.","Spatial data can be incomplete or biased; careful sourcing and interpretation matter.","mapping|geospatial"),
+career("devops-engineer","DevOps Engineer","Technology & data","Cloud computing|Software development|Networking|Cybersecurity|Operations","Software|Data|Product building","Automate a small deployment and add a health check plus a rollback note.","The job can involve on-call work and balancing delivery speed with service reliability.","platform|SRE|infrastructure"),
+career("business-analyst","Business Analyst","Business & finance","Business analysis|Research|Data analysis|Writing|Facilitation","Business|Data|People and culture","Document a real process, identify one bottleneck and propose a measurable improvement.","The role varies widely; clarify whether it focuses on operations, systems or strategy.","requirements|process"),
+career("project-manager","Project Manager","Business & finance","Project management|Facilitation|Writing|Leadership|Operations","Workplace|Product building|People and culture","Plan a small project with owners, milestones, risks and a weekly status update.","Coordination is central; subject expertise and authority differ by team.","delivery|program"),
+career("operations-manager","Operations Manager","Business & finance","Operations|Project management|Data analysis|Leadership|Teamwork","Business|Logistics|Workplace","Map one recurring operation and test a small change that reduces delays or rework.","Some roles include shift coverage and responsibility for day-to-day service levels.","process|management"),
+career("supply-chain-analyst","Supply Chain Analyst","Business & finance","Supply chain|Data analysis|SQL|Operations|Critical thinking","Logistics|Business|Transportation","Use a sample demand dataset to compare two inventory policies and their trade-offs.","Supply chains face disruption; forecasts are inputs to decisions, not guarantees.","logistics|procurement"),
+career("financial-analyst","Financial Analyst","Business & finance","Financial modeling|Accounting|Data analysis|Writing","Finance|Business|Investing","Build a simple company comparison from public filings and state your assumptions.","Entry paths can be competitive and often reward strong spreadsheet and communication skills.","markets|corporate finance"),
+career("fpa-analyst","FP&A Analyst","Business & finance","Financial modeling|Budgeting|Accounting|Data analysis|Facilitation","Finance|Business|Workplace","Create a small budget-versus-actual model and explain the main variance drivers.","Forecasts depend on assumptions and cross-team input; they are rarely exact predictions.","planning|budget"),
+career("accountant","Accountant","Business & finance","Accounting|Budgeting|Regulatory compliance|Data analysis","Finance|Business|Government services","Reconcile a sample set of transactions and document the checks you used.","Some accounting paths require specific credentials or supervised experience.","bookkeeping|tax"),
+career("auditor","Auditor","Business & finance","Accounting|Research|Critical thinking|Writing|Regulatory compliance","Finance|Justice|Business","Review a sample process for control gaps and write a short evidence-based finding.","Audit work requires independence, detailed records and comfort challenging assumptions.","assurance|compliance"),
+career("actuary","Actuary","Business & finance","Statistics|Financial modeling|Python|Critical thinking|Writing","Finance|Data|Mathematics","Work through a basic probability model and explain the assumptions in plain language.","Professional actuarial exams take sustained study and are a major part of the pathway.","insurance|risk"),
+career("investment-analyst","Investment Research Analyst","Business & finance","Financial modeling|Research|Data analysis|Writing","Investing|Finance|Business","Write a one-page investment thesis using public information and list what would change your view.","Markets are uncertain; rigorous research does not guarantee returns or investment outcomes.","equity|markets"),
+career("financial-advisor","Personal Financial Advisor","Business & finance","Financial planning|Finance|Customer service|Writing|Negotiation","Finance|People and culture|Social impact","Create a sample financial goals worksheet and explain each assumption clearly.","Licensing, fiduciary duties and client trust are important in many advising roles.","wealth|planning"),
+career("risk-analyst","Risk Analyst","Business & finance","Data analysis|Statistics|Financial modeling|Writing|Critical thinking","Finance|Cybersecurity|Public safety","Build a simple risk register for a realistic scenario and prioritize mitigations.","Risk models can miss rare events; communicate uncertainty as well as estimated impact.","insurance|enterprise"),
+career("fintech-pm","Fintech Product Manager","Business & finance","Product management|Finance|Research|Data analysis|Writing","Finance|Technology|Product building","Map a frustrating money task and test a simpler flow with three potential users.","Financial products have compliance, security and trust requirements beyond interface design.","payments|banking"),
+career("marketing-analyst","Marketing Analyst","Business & finance","Marketing|Data analysis|Statistics|SQL|Writing","Marketing|Data|Business","Analyze a small campaign dataset and explain which result is actionable and which is noise.","Attribution is imperfect; privacy changes can limit tracking data.","advertising|growth"),
+career("growth-marketer","Growth Marketer","Business & finance","Marketing|Data analysis|Writing|SEO|Experimentation","Marketing|Entrepreneurship|Consumer technology","Design one low-cost experiment with a clear audience, metric and stop condition.","Short-term acquisition metrics should be balanced with retention and user value.","acquisition|growth"),
+career("seo-specialist","SEO Specialist","Business & finance","SEO|Writing|Data analysis|Research","Marketing|Storytelling|Consumer technology","Audit one page for search intent, clarity and technical discoverability.","Search rules and rankings change; sustainable work starts with useful content and sound site structure.","search|content"),
+career("brand-strategist","Brand Strategist","Business & finance","Marketing|Research|Writing|Facilitation","Marketing|Storytelling|Design","Compare how three brands explain the same need and draft a sharper positioning statement.","The role depends on evidence and collaboration, not only creative concepts.","communications|brand"),
+career("market-researcher","Market Research Analyst","Business & finance","Market research|Statistics|Research|Writing|Data analysis","Business|Human behavior|Marketing","Write a short survey, collect a small sample and note where its results may be biased.","Sampling and question design shape results; small samples should not be overgeneralized.","consumer insights|research"),
+career("sales-engineer","Sales Engineer","Business & finance","Sales|Software development|Public speaking|Research|Negotiation","Software|Business|People and culture","Explain a technical product to a nontechnical audience using a short demo.","The work combines technical problem-solving with customer targets and travel in some teams.","solutions|pre-sales"),
+career("account-executive","Account Executive","Business & finance","Sales|Negotiation|Writing|Customer service|Research","Business|People and culture|Entrepreneurship","Practice a discovery conversation and write a concise follow-up tied to the buyer's needs.","Compensation may depend on sales targets; learn how quotas and territory are set.","sales|partnerships"),
+career("customer-success","Customer Success Manager","Business & finance","Customer service|Project management|Writing|Data analysis|Facilitation","People and culture|Software|Workplace","Draft an onboarding plan with milestones and a way to spot users who need help.","Some roles combine support, retention and sales goals; clarify the balance.","client success|account management"),
+career("hr-specialist","People Operations Specialist","Business & finance","People operations|Writing|Facilitation|Regulatory compliance|Customer service","People and culture|Workplace|Justice","Create a clear onboarding checklist and review it for accessibility and consistency.","The work handles sensitive information and may involve difficult employee situations.","human resources|HR"),
+career("recruiter","Recruiter","Business & finance","People operations|Writing|Research|Negotiation|Customer service","People and culture|Workplace|Business","Build a fair interview scorecard for one role and check that each criterion is job-related.","Hiring cycles and targets can fluctuate; candidate experience and bias reduction matter.","talent acquisition|hiring"),
+career("entrepreneur","Small Business Founder","Business & finance","Entrepreneurship|Sales|Budgeting|Marketing|Operations","Entrepreneurship|Product building|Community","Talk to ten potential customers before spending money on a full product build.","Income and workload can be uncertain; validate demand and keep experiments affordable.","founder|small business"),
+career("registered-nurse","Registered Nurse","Health & care","Clinical care|Patient communication|Teamwork|Critical thinking","Health|Medicine|People and culture","Interview a nurse about a typical shift and research accredited local training routes.","Nursing requires accredited education, licensure and emotionally demanding patient care.","RN|clinical"),
+career("nurse-practitioner","Nurse Practitioner","Health & care","Clinical care|Patient communication|Biology|Leadership","Health|Medicine|Community","Compare the accredited education and licensing steps in the region where you plan to work.","This advanced clinical role requires substantial formal education and licensure.","advanced practice|nursing"),
+career("physician-assistant","Physician Assistant","Health & care","Clinical care|Biology|Patient communication|Teamwork","Health|Medicine|Science","Speak with a practicing PA and map the accredited prerequisites and clinical training.","The title, scope of practice and education requirements vary by jurisdiction.","PA|clinical"),
+career("clinical-research-coordinator","Clinical Research Coordinator","Health & care","Research|Clinical care|Writing|Regulatory compliance|Project management","Health|Medicine|Research","Read a public study protocol and draft a participant visit checklist.","Human-subject research has strict consent, privacy and safety requirements.","clinical trials|study coordinator"),
+career("medical-lab-scientist","Medical Laboratory Scientist","Health & care","Lab techniques|Biology|Chemistry|Quality assurance|Research","Health|Biology|Medicine","Review the training and certification route for one local medical laboratory role.","Many positions require accredited coursework and certification or licensure.","medical lab|clinical laboratory"),
+career("biomedical-engineer","Biomedical Engineer","Health & care","Mechanical design|Biology|Engineering|Research|Quality assurance","Health|Engineering|Making things","Sketch a device improvement and list the safety tests needed before patient use.","Medical devices are highly regulated and often require specialized engineering training.","medical device|bioengineering"),
+career("health-informatics","Health Informatics Analyst","Health & care","Data analysis|SQL|Clinical care|Writing|Cybersecurity","Health|Data|Technology","Map a simple care workflow and identify one data quality or handoff problem.","Health data access is tightly controlled; clinical context matters as much as software.","health IT|EHR"),
+career("public-health-analyst","Public Health Analyst","Health & care","Public health|Statistics|Data analysis|Policy analysis|Writing","Health|Community|Government services","Use an open health dataset to explain one local trend and its limitations.","Population data can hide differences between groups; context and privacy matter.","population health|epidemiology"),
+career("epidemiologist","Epidemiologist","Health & care","Statistics|Biology|Research|Data analysis|Writing","Health|Biology|Research","Read an open epidemiology paper and explain its study design and uncertainty.","Many epidemiology roles require graduate-level training and careful causal reasoning.","disease|population health"),
+career("genetic-counselor","Genetic Counselor","Health & care","Biology|Counseling|Patient communication|Research","Health|Biology|Human behavior","Learn how genetic counselors support informed decisions and compare accredited programs.","This specialized role usually requires graduate education and credentialing.","genetics|genomics"),
+career("physical-therapist","Physical Therapist","Health & care","Clinical care|Patient communication|Biology|Coaching","Health|Sports and performance|Medicine","Observe a licensed PT if possible and research accredited education requirements.","Formal clinical education, licensing and hands-on patient work are required.","physiotherapy|rehabilitation"),
+career("occupational-therapist","Occupational Therapist","Health & care","Clinical care|Patient communication|Psychology|Coaching","Health|Human behavior|Community","Explore how an OT adapts a daily activity for someone with different needs.","Most clinical roles require accredited graduate education and licensure.","rehabilitation|accessibility"),
+career("mental-health-counselor","Mental Health Counselor","Health & care","Counseling|Psychology|Patient communication|Mediation","Mental health|Human behavior|Health","Research accredited counseling pathways and interview a licensed practitioner about supervised practice.","Licensure, supervised hours and strong professional boundaries are essential.","therapy|behavioral health"),
+career("health-educator","Health Educator","Health & care","Teaching|Public health|Writing|Facilitation|Research","Health|Education|Community","Turn one reliable health source into a clear, accessible one-page explainer.","Health communication must be evidence-based and tailored to the audience.","health promotion|wellness"),
+career("environmental-scientist","Environmental Scientist","Science & environment","Environmental science|Research|Data analysis|Writing|GIS","Climate|Outdoors|Science","Use open local environmental data to answer one question and state what it cannot show.","Fieldwork, permits and graduate study may be part of particular specializations.","ecology|conservation"),
+career("climate-data-analyst","Climate Data Analyst","Science & environment","Data analysis|Python|Statistics|Environmental science|Data visualization","Climate|Data|Clean energy","Visualize a public climate dataset and annotate the trend, uncertainty and source.","Climate projections have uncertainty ranges; careful interpretation is more useful than a single number.","climate science|energy transition"),
+career("sustainability-consultant","Sustainability Consultant","Science & environment","Sustainability|Data analysis|Research|Writing|Project management","Climate|Business|Clean energy","Estimate the emissions of one everyday process and propose a measurable reduction.","Organizations define sustainability differently; learn how claims are measured and verified.","ESG|decarbonization"),
+career("renewable-engineer","Renewable Energy Engineer","Science & environment","Electrical systems|Mechanical design|Physics|Data analysis|Project management","Clean energy|Engineering|Energy","Compare the basic components of a small solar or wind system and document design trade-offs.","Engineering roles often require a relevant degree and safety-aware field experience.","solar|wind|energy"),
+career("solar-installer","Solar PV Installer","Engineering & built world","Electrical systems|Construction|Maintenance|Teamwork","Clean energy|Making things|Outdoors","Talk with a local installer about entry training and the safety practices used on site.","Work is physical and weather-exposed; electrical safety training is essential.","photovoltaic|solar technician"),
+career("conservation-scientist","Conservation Scientist","Science & environment","Environmental science|Research|GIS|Writing|Community outreach","Wildlife|Outdoors|Climate","Map a local habitat concern and find the public agency or group managing it.","Field roles can be seasonal and competitive; regional ecology knowledge helps.","natural resources|forestry"),
+career("wildlife-biologist","Wildlife Biologist","Science & environment","Biology|Research|GIS|Data analysis|Environmental science","Wildlife|Animals|Outdoors","Review a local wildlife survey and summarize how the species was counted.","Many specialist roles require advanced study and involve substantial outdoor fieldwork.","zoology|ecology"),
+career("urban-planner","Urban Planner","Science & environment","Policy analysis|GIS|Research|Facilitation|Writing","Urban life|Architecture and places|Community","Choose a local street and propose one change using a public planning document.","Planning decisions involve public process, competing needs and long timelines.","city planning|transport planning"),
+career("environmental-policy","Environmental Policy Analyst","Science & environment","Policy analysis|Research|Writing|Data analysis|Facilitation","Climate|Government|Public policy","Summarize one proposed local environmental policy with likely benefits and trade-offs.","Policy work depends on jurisdiction, evidence quality and stakeholder input.","climate policy|regulation"),
+career("agricultural-scientist","Agricultural Scientist","Science & environment","Agriculture|Biology|Research|Data analysis|Environmental science","Agriculture|Food systems|Science","Compare two crop or soil practices using a reliable field study.","Research may be tied to seasonal cycles and specialized lab or field facilities.","agronomy|crop science"),
+career("food-scientist","Food Scientist","Science & environment","Food preparation|Chemistry|Quality assurance|Research|Regulatory compliance","Food|Health|Science","Compare ingredient labels and research one food-safety or shelf-life question.","Food production is regulated and may involve plant, lab or quality-control settings.","food technology|food safety"),
+career("hydrologist","Hydrologist","Science & environment","Environmental science|GIS|Statistics|Research|Data analysis","Water|Climate|Outdoors","Plot a local stream or rainfall dataset and identify the seasonal pattern.","Field measurements and technical modeling are common; local water systems matter.","water resources|hydrology"),
+career("chemist","Chemist","Science & environment","Chemistry|Lab techniques|Research|Statistics|Quality assurance","Chemistry|Science|Making things","Read a lab method and explain its controls, measurements and safety steps.","Many research and specialist chemistry roles require advanced study and lab access.","chemical science|materials"),
+career("biologist","Biologist","Science & environment","Biology|Research|Lab techniques|Statistics|Writing","Biology|Wildlife|Health","Reproduce one figure from an open biology paper and summarize the method.","Career paths vary widely; research roles often require graduate education.","life science|biological science"),
+career("biostatistician","Biostatistician","Science & environment","Statistics|Python|Data analysis|Research|Writing","Health|Data|Biology","Analyze a small public health dataset and explain why correlation is not causation.","Advanced statistical training is common, and study design shapes every conclusion.","biometrics|clinical data"),
+career("graphic-designer","Graphic Designer","Design & media","Graphic design|Visual design|Writing|Research","Design|Storytelling|Marketing","Create a small visual identity for a real community project and explain the choices.","A strong portfolio and ability to respond to feedback matter more than a specific tool.","visual communication|branding"),
+career("ux-ui-designer","UX/UI Designer","Design & media","Product design|UX research|Visual design|Web development","Design|Human behavior|Consumer technology","Redesign one form to make its next step obvious and test it with a first-time user.","The title varies between companies; confirm whether the work includes research and implementation.","interface|interaction design"),
+career("content-designer","Content Designer","Design & media","Writing|UX research|Editing|Product design","Design|Education|Human behavior","Rewrite a confusing sign-up flow using plain language and test comprehension.","Content design works best when writers join product decisions early.","UX content|service design"),
+career("ux-writer","UX Writer","Design & media","Writing|Editing|UX research|Product design","Design|Human behavior|Software","Improve the error messages in one small app so each says what happened and what to do next.","Some teams combine this role with broader content design or product writing.","microcopy|product writing"),
+career("industrial-designer","Industrial Designer","Design & media","Industrial design|CAD|Research|Visual design|Mechanical design","Making things|Design|Consumer technology","Sketch and model a simple object, then test its size and grip with a user.","Manufacturing constraints and prototyping access shape the work.","product design|physical product"),
+career("architect","Architect","Engineering & built world","Architecture|CAD|Research|Visual design|Project management","Architecture and places|Design|Construction","Study a small public building and sketch how people move through its spaces.","Professional architect titles usually require accredited education and supervised licensing steps.","buildings|built environment"),
+career("interior-designer","Interior Designer","Design & media","Visual design|Architecture|Research|Project management","Architecture and places|Design|Hospitality","Redesign one room layout around a clear user need and a realistic budget.","Local regulations and formal credentials vary; client coordination is a large part of the work.","interior|spaces"),
+career("copywriter","Copywriter","Design & media","Writing|Editing|Marketing|Research","Storytelling|Marketing|Media","Write three short versions of a real product message for different audiences.","Commercial writing often involves revisions, deadlines and evidence for claims.","advertising|brand writing"),
+career("content-strategist","Content Strategist","Design & media","Content strategy|Research|Writing|Data analysis|Facilitation","Storytelling|Education|Marketing","Audit a small website and suggest what to keep, rewrite or remove based on user needs.","Strategy requires stakeholder alignment and maintenance, not only a content calendar.","editorial|digital content"),
+career("journalist","Journalist","Design & media","Research|Writing|Editing|Languages|Public speaking","Storytelling|History|Government","Report a small local story using at least two named sources and a clear fact check.","Deadlines and income can be uncertain; accuracy and source protection are core responsibilities.","reporter|news"),
+career("video-producer","Video Producer","Design & media","Video production|Writing|Project management|Audio production|Editing","Film|Storytelling|Media","Produce a 60-second explainer with a clear script, clean audio and captions.","Production budgets and schedules can be tight; accessibility and rights clearance matter.","film|digital video"),
+career("animator","Animator","Design & media","Animation|Visual design|Video production|Teamwork","Film|Games|Storytelling","Animate a short movement study and ask viewers what action they think it shows.","Building a polished portfolio takes time, and production roles can be highly specialized.","motion design|3D"),
+career("photographer","Photographer","Design & media","Photography|Visual design|Editing|Customer service","Storytelling|Media|Fashion","Create a six-image photo story around one local place or person, with permission.","Freelance income, equipment and image rights need thoughtful planning.","photography|visual media"),
+career("audio-engineer","Audio Engineer","Design & media","Audio production|Physics|Teamwork|Quality assurance","Music|Film|Media","Record and mix a short voice clip, then compare it on headphones and a phone speaker.","Studio work can involve irregular schedules and specialized equipment.","sound|recording"),
+career("social-media-manager","Social Media Manager","Business & finance","Social media|Writing|Data analysis|Graphic design|Marketing","Media|Marketing|Community","Plan one week of useful posts for a small organization and define what success means.","Platform reach changes; build community value instead of relying only on follower counts.","community manager|digital marketing"),
+career("fashion-designer","Fashion Designer","Design & media","Fashion|Visual design|Research|Entrepreneurship","Fashion|Design|Making things","Develop a small concept board and prototype one garment detail from a chosen material.","The industry can be competitive and resource-intensive; production knowledge helps.","apparel|textile"),
+career("teacher","School Teacher","Education & public service","Teaching|Facilitation|Writing|Coaching|Research","Education|Children's learning|Community","Design a short lesson, teach it to a small group and ask what was confusing.","Certification, classroom placements and safeguarding requirements vary by region.","educator|classroom"),
+career("instructional-designer","Instructional Designer","Education & public service","Instructional design|Teaching|Writing|Research|Visual design","Education|Children's learning|Technology","Turn a complex topic into a 10-minute lesson with one practice activity and feedback check.","Good learning design takes subject access and learner testing, not just slide production.","learning design|training"),
+career("education-program-manager","Education Program Manager","Education & public service","Project management|Teaching|Operations|Data analysis|Facilitation","Education|Community|Social impact","Plan a small learning program with an audience, outcome, schedule and evaluation method.","Funding cycles and education calendars can influence timelines and role stability.","program coordinator|learning"),
+career("school-counselor","School Counselor","Education & public service","Counseling|Psychology|Teaching|Patient communication","Education|Mental health|Children's learning","Research your region's school-counselor credentials and speak with someone in the role.","Most positions require graduate training, supervised practice and local certification.","student support|guidance"),
+career("academic-advisor","Academic Advisor","Education & public service","Coaching|Teaching|Writing|Customer service|Research","Education|People and culture|Community","Draft a clear decision guide that helps a student compare two course pathways.","Institutional policies shape advice; strong listening and referral judgment are essential.","student advising|higher education"),
+career("librarian","Librarian","Education & public service","Research|Teaching|Writing|Customer service|Data analysis","Education|History|Community","Create a short guide that helps a newcomer find trustworthy sources on a topic.","Some librarian positions require a specialized graduate degree; settings vary widely.","information science|archives"),
+career("social-worker","Social Worker","Education & public service","Counseling|Community outreach|Writing|Policy analysis|Patient communication","Community|Mental health|Justice","Learn about one local social-service pathway and the qualifications it requires.","Formal education, licensing and emotionally demanding caseloads are common in direct practice.","social services|casework"),
+career("community-health-worker","Community Health Worker","Health & care","Community outreach|Public health|Languages|Patient communication","Health|Community|Social impact","Ask a local health organization how community health workers connect residents to services.","The work is relationship-based and may include travel or challenging community conditions.","health outreach|navigator"),
+career("nonprofit-program-manager","Nonprofit Program Manager","Education & public service","Project management|Grant writing|Budgeting|Community outreach|Writing","Social impact|Community|Government services","Volunteer with a local program and map how its activities connect to its intended outcome.","Resources can be limited and outcomes depend on partners and funding.","charity|social sector"),
+career("policy-analyst","Policy Analyst","Education & public service","Policy analysis|Research|Writing|Data analysis|Facilitation","Public policy|Government|Social impact","Write a one-page brief on a local proposal, including evidence and trade-offs.","Policy impact can take years and depends on political and institutional context.","government|public affairs"),
+career("attorney","Attorney","Education & public service","Legal research|Writing|Public speaking|Negotiation|Critical thinking","Law|Justice|Human rights","Attend a public legal education session and compare the qualification route in your jurisdiction.","A law degree, licensing and substantial training are required in many jurisdictions.","lawyer|legal"),
+career("paralegal","Paralegal","Education & public service","Legal research|Writing|Research|Project management|Regulatory compliance","Law|Justice|Business","Review a public legal form and create a checklist of the documents it asks for.","Credential expectations vary; paralegals work under rules set by their jurisdiction and employer.","legal assistant|law"),
+career("mediator","Mediator","Education & public service","Mediation|Facilitation|Counseling|Writing|Negotiation","Justice|Human behavior|Community","Practice summarizing two sides of a low-stakes disagreement without taking sides.","Trust, neutrality and recognized training are important; mediators do not decide every dispute.","conflict resolution|facilitation"),
+career("grant-writer","Grant Writer","Education & public service","Grant writing|Research|Writing|Budgeting|Project management","Social impact|Education|Community","Turn a nonprofit program idea into a one-page case for support with a simple budget.","Funding is competitive and proposals must match a funder's priorities and evidence requirements.","fundraising|development"),
+career("community-organizer","Community Organizer","Education & public service","Community outreach|Facilitation|Writing|Leadership|Research","Community|Justice|Social impact","Help host a listening session and summarize what participants want changed.","Progress depends on relationships and sustained participation, not one event.","advocacy|organizing"),
+career("emergency-manager","Emergency Management Specialist","Education & public service","Emergency response|Project management|Writing|Public speaking|Operations","Public safety|Government|Community","Review a public emergency plan and identify one clear communication improvement.","The work can involve stressful events, irregular hours and coordination across agencies.","disaster response|preparedness"),
+career("interpreter","Translator and Interpreter","Education & public service","Languages|Writing|Research|Patient communication","Languages|Community|Government services","Translate a short public information notice and have a fluent speaker review it.","Professional settings may require certification, confidentiality and specialized vocabulary.","translation|language services"),
+career("museum-educator","Museum Educator","Education & public service","Teaching|Writing|Facilitation|Research|Storytelling","History|Education|Community","Design a five-minute object-based activity for a visitor who is new to the subject.","Museum funding and openings can be limited; public engagement skills transfer across sectors.","museum|heritage"),
+career("mechanical-engineer","Mechanical Engineer","Engineering & built world","Mechanical design|CAD|Physics|Research|Quality assurance","Engineering|Making things|Transportation","Model a small mechanism and list the physical tests needed before use.","Engineering roles commonly need a relevant degree and strong safety and testing practices.","product|machines"),
+career("electrical-engineer","Electrical Engineer","Engineering & built world","Electrical systems|Physics|CAD|Research|Quality assurance","Engineering|Clean energy|Robotics","Sketch a low-voltage circuit and simulate or safely test one design choice.","Formal engineering education and careful electrical safety practices are common requirements.","electronics|power"),
+career("civil-engineer","Civil Engineer","Engineering & built world","Construction|CAD|Physics|Project management|Research","Construction|Transportation|Architecture and places","Study a public infrastructure project and identify its main users and constraints.","Professional engineering work can require accredited education, supervised practice and licensure.","infrastructure|structural"),
+career("construction-manager","Construction Manager","Engineering & built world","Construction|Project management|Budgeting|Leadership|Operations","Construction|Architecture and places|Making things","Plan a small renovation with a sequence, budget risks and safety checkpoints.","Site work requires safety knowledge and coordination across contractors and trades.","building|project delivery"),
+career("cad-technician","CAD Technician","Engineering & built world","CAD|Mechanical design|Architecture|Critical thinking","Engineering|Architecture and places|Making things","Create a dimensioned model of a simple object or room and ask for a technical review.","Accuracy standards and software differ by industry; a portfolio of precise drawings helps.","drafting|design technology"),
+career("electrician","Electrician","Engineering & built world","Electrical systems|Maintenance|Construction|Critical thinking","Making things|Construction|Energy","Research an approved apprenticeship route and speak with a licensed electrician about daily work.","Training, licensing and electrical safety rules are specific to each region.","electrical trade|wiring"),
+career("maintenance-technician","Industrial Maintenance Technician","Engineering & built world","Maintenance|Electrical systems|Mechanical design|Quality assurance","Engineering|Making things|Manufacturing","Learn how a local facility tracks equipment faults and preventive maintenance.","Some work is shift-based and involves safety-critical machinery.","industrial|repair"),
+career("mechatronics-technician","Mechatronics Technician","Engineering & built world","Robotics|Electrical systems|Mechanical design|Maintenance|Quality assurance","Robotics|Engineering|Making things","Build or simulate a simple sensor-and-motor system and document its failure modes.","Employers value practical troubleshooting and safe experience with automated equipment.","automation|controls"),
+career("automotive-technician","Automotive Service Technician","Engineering & built world","Maintenance|Electrical systems|Critical thinking|Customer service","Transportation|Making things|Engineering","Shadow a technician or inspect a safe training system to learn a diagnostic workflow.","Modern vehicles combine software and electronics; tools, training and certification matter.","mechanic|vehicle repair"),
+career("logistics-coordinator","Logistics Coordinator","Business & finance","Supply chain|Operations|Writing|Data analysis|Customer service","Logistics|Transportation|Business","Map a delivery process and identify one source of avoidable delay or confusion.","Time-sensitive coordination can be stressful, and disruptions are common.","freight|distribution"),
+career("event-planner","Event Planner","Business & finance","Event planning|Project management|Budgeting|Negotiation|Writing","Events|Hospitality|Community","Plan a small gathering with a budget, timeline, access needs and contingency.","Evening or weekend work and last-minute changes are common in many event roles.","events|production"),
+career("chef","Chef","Hospitality & places","Food preparation|Leadership|Operations|Quality assurance","Food|Hospitality|Making things","Plan and prepare a small menu while tracking timing, waste and food safety.","Kitchen work can be physically demanding with irregular hours and high pressure.","culinary|restaurant"),
+career("hotel-operations","Hotel Operations Manager","Hospitality & places","Customer service|Operations|Leadership|Languages|Budgeting","Hospitality|Travel|People and culture","Map a guest check-in journey and propose one low-cost service improvement.","Hospitality schedules often include nights, weekends and seasonal demand.","lodging|guest services"),
+career("real-estate-analyst","Real Estate Analyst","Business & finance","Real estate analysis|Financial modeling|Data analysis|Research","Real estate|Finance|Urban life","Compare public information for two properties and write down assumptions and risks.","Property markets are local and cyclical; analysis is not a guarantee of investment outcomes.","property|housing"),
+career("food-entrepreneur","Food Business Owner","Hospitality & places","Food preparation|Entrepreneurship|Budgeting|Marketing|Operations","Food|Entrepreneurship|Hospitality","Price one small food product, test demand with a small batch and calculate costs.","Food safety rules, permits and low margins can make the business harder than the recipe.","restaurant|catering"),
+career("sports-scientist","Sports Scientist","Health & care","Biology|Statistics|Data analysis|Coaching|Research","Sports and performance|Health|Data","Analyze a public training dataset and explain one performance measure with its limitations.","Sports science roles may require graduate study and access to teams or lab facilities.","exercise science|performance"),
+career("sports-coach","Sports Coach","Education & public service","Coaching|Teaching|Facilitation|Public speaking|Leadership","Sports and performance|Community|Human behavior","Plan a beginner practice with one measurable goal and a safe progression.","Coaching income and schedules vary; safeguarding and sport-specific credentials may apply.","athletics|training"),
+career("veterinarian","Veterinarian","Health & care","Biology|Clinical care|Chemistry|Patient communication|Research","Animals|Health|Science","Research accredited veterinary programs and speak with a veterinarian about daily work.","Veterinary medicine requires extensive accredited education, licensing and emotionally demanding care.","animal doctor|vet"),
+career("vet-technician","Veterinary Technician","Health & care","Clinical care|Biology|Patient communication|Lab techniques|Teamwork","Animals|Health|Community","Compare local veterinary technician programs and ask a clinic about supervised experience.","Accreditation and credential requirements vary by region; clinic work can be physically demanding.","animal care|vet tech"),
+career("astronomer","Astronomer","Science & environment","Physics|Statistics|Python|Research|Data analysis","Space|Science|Mathematics","Explore an open astronomy dataset and explain one pattern in a short notebook.","Research astronomy roles commonly require a doctorate and have a competitive academic path.","astrophysics|space science"),
+career("aerospace-engineer","Aerospace Engineer","Engineering & built world","Mechanical design|Physics|CAD|Software development|Quality assurance","Space|Engineering|Transportation","Model a simple flight-related component and list the safety tests it would need.","Most engineering roles require a relevant degree and work within strict safety standards.","aviation|aircraft"),
+career("music-producer","Music Producer","Design & media","Audio production|Project management|Music performance|Entrepreneurship","Music|Media|Storytelling","Produce a short track or recording session and ask collaborators for structured feedback.","Income can be project-based; a portfolio, network and rights knowledge matter.","recording|sound"),
+career("music-teacher","Music Teacher","Education & public service","Teaching|Music performance|Coaching|Facilitation","Music|Education|Children's learning","Design a short beginner lesson around one musical idea and teach it to a willing learner.","School roles may require credentials; private teaching also involves finding and retaining students.","instrument|music education"),
+career("museum-curator","Museum Curator","Education & public service","Research|Writing|Project management|Grant writing|Facilitation","History|Education|Community","Write a short exhibit label for an object using two reliable sources and plain language.","Curator positions are limited and often require graduate study or deep subject expertise.","collections|heritage"),
+career("retail-buyer","Retail Buyer","Business & finance","Market research|Financial modeling|Negotiation|Data analysis|Marketing","Retail|Fashion|Business","Compare three products for one audience and justify a small sample purchase using evidence.","Buying decisions carry inventory risk and often depend on seasonal sales cycles.","merchandising|assortment"),
+career("beauty-product-developer","Beauty Product Developer","Science & environment","Chemistry|Research|Regulatory compliance|Product management|Quality assurance","Beauty|Science|Consumer technology","Compare ingredient lists for a product category and research its safety and labeling rules.","Product claims and ingredients are regulated; specialist chemistry or formulation experience may be needed.","cosmetics|formulation"),
+career("travel-consultant","Travel Consultant","Hospitality & places","Customer service|Event planning|Languages|Sales|Research","Travel|Hospitality|People and culture","Build a sample itinerary around one traveler’s budget, timing and access needs.","Travel demand can be seasonal and customer plans may change at short notice.","tourism|travel advisor")
+];
+var STG={"Student":["1st year","2nd year","3rd year","Final year","Recent graduate"],"Working professional":["0-2 years experience","3-5 years experience","6-10 years experience","10+ years experience"]};
+var GOAL={direction:"A broad set of paths ranked from your profile.",switch:"Paths that reuse your strengths and offer a realistic bridge into another field.",grow:"Paths that build on your experience and show where to level up."};
+var sel={},quizGenerated=[],prof={status:""},supa=null,uid=null,authPromise=null,turnstileApiPromise=null,turnstileWidget=null,captchaPending=null,busy=false,busyQ=false,accountDeleting=false,why="",formDirty=false,restoring=false,cloudQueue=Promise.resolve();
+var LS="vertez:v2",OLDLS="vertez:v1",last={paths:null,pr:null,aiConsent:false},chat=[];
+var SKALIAS={"js":"javascript","js programming":"javascript","analytics":"data analysis","data analytics":"data analysis","excel":"data analysis","spreadsheets":"data analysis","speaking":"public speaking","presentation":"public speaking","hardware":"electrical systems","coding":"software development","programming":"software development","front end":"web development","frontend":"web development","back end":"software development","backend":"software development","ux":"ux research","ui":"visual design","machine learning models":"machine learning","ai":"ai prototyping","gen ai":"ai prototyping","financial analysis":"financial modeling","project planning":"project management","people management":"leadership","customer support":"user support","communications":"writing","content creation":"content strategy","photo":"photography","video editing":"video production","gis mapping":"gis","accounting skills":"accounting","spreadsheet modeling":"financial modeling","experiments":"experimentation","fashion design":"fashion"};
+var INALIAS={"money":"finance","fintech":"finance","video games":"games","gaming":"games","ecology":"wildlife","environment":"climate","renewables":"clean energy","renewable energy":"clean energy","mental wellness":"mental health","wellbeing":"mental wellness","public service":"government services","civic life":"government","community work":"community","animals":"wildlife","sports":"sports and performance","movies":"film","interior spaces":"architecture and places","startups":"entrepreneurship","small business":"entrepreneurship","tech":"technology","technology products":"consumer technology","human resources":"people and culture","psychology":"human behavior","healthcare":"health","medicine and care":"medicine","food and cooking":"food","climate change":"climate","policy":"public policy","law and justice":"law"};
+var FIELDWORDS={
+ "technology data":["technology","tech","software","computer","programming","data","cyber","information technology","IT"],
+ "business finance":["business","finance","accounting","economics","sales","marketing","management","investing","commerce"],
+ "health care":["health","healthcare","medicine","nursing","clinical","care","psychology","public health"],
+ "science environment":["science","biology","chemistry","environment","climate","sustainability","agriculture","ecology","energy"],
+ "design media":["design","art","media","film","writing","communication","journalism","creative","fashion"],
+ "education public service":["education","teaching","policy","government","law","social work","community","public service","humanities"],
+ "engineering built world":["engineering","construction","architecture","mechanical","electrical","trades","manufacturing","automotive","building"],
+ "hospitality places":["hospitality","food","travel","hotel","restaurant","tourism"]
+};
+function normText(s){return lc(String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"")).replace(/[^a-z0-9]+/g," ").trim()}
+function canonical(s,kind){var n=normText(s),a=kind==="interest"?INALIAS:SKALIAS;return a[n]||n}
+function related(a,b,kind){var x=canonical(a,kind),y=canonical(b,kind);return x===y||(x.length>4&&y.length>4&&(x.indexOf(y)>-1||y.indexOf(x)>-1))}
+function key(kind,t){return kind+":"+normText(t)}
+function updateCounts(){[["skills","skill-count","skill"],["ints","interest-count","interest"]].forEach(function(x){var box=$(x[0]),n=Object.keys(sel).filter(function(k){return sel[k].kind===x[2]}).length,total=box.children.length;$(x[1]).textContent=n+" selected · "+total+" options"})}
+function chip(t,box,on,kind){var b=document.createElement("button");b.className="chip";b.type="button";b.textContent=t;b.setAttribute("aria-pressed",on?"true":"false");if(on)sel[key(kind,t)]={text:t,kind:kind};
+b.onclick=function(){var s=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",s?"true":"false");if(s)sel[key(kind,t)]={text:t,kind:kind};else delete sel[key(kind,t)];updateCounts()};box.appendChild(b);return b}
+function filterOptions(input,box){var q=normText($(input).value);[].forEach.call($(box).children,function(b){b.hidden=!!q&&normText(b.textContent).indexOf(q)<0})}
+function build(){sel={};$("skills").innerHTML="";$("ints").innerHTML="";SK.forEach(function(t){chip(t,$("skills"),false,"skill")});IN.forEach(function(t){chip(t,$("ints"),false,"interest")});filterOptions("skill-search","skills");filterOptions("interest-search","ints");updateCounts()}
+function add(inp,box,kind){var v=$(inp).value.trim().slice(0,40);if(!v)return;$(inp).value="";var ex=[].slice.call($(box).children).filter(function(c){return normText(c.textContent)===normText(v)})[0];if(ex){if(ex.getAttribute("aria-pressed")!=="true")ex.click();return}
+var search=kind==="skill"?"skill-search":"interest-search";$(search).value="";var b=chip(v,$(box),true,kind);filterOptions(search,box);updateCounts();b.scrollIntoView({block:"nearest",behavior:reduce?"auto":"smooth"})}
+build();
+[["c-sk","a-sk","skills","skill"],["c-in","a-in","ints","interest"]].forEach(function(x){$(x[1]).onclick=function(){add(x[0],x[2],x[3])};$(x[0]).addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();add(x[0],x[2],x[3])}})});
+$("skill-search").addEventListener("input",function(){filterOptions("skill-search","skills")});
+$("interest-search").addEventListener("input",function(){filterOptions("interest-search","ints")});
+$("flow").addEventListener("input",function(e){if(!restoring&&e.target.matches("input,select"))formDirty=true});
+$("flow").addEventListener("change",function(e){if(!restoring&&e.target.matches("input,select"))formDirty=true});
+$("flow").addEventListener("click",function(e){if(!restoring&&e.target.closest("#seg,#skills,#ints,#reset"))formDirty=true;if(!restoring&&e.target.closest("#ints .chip")){var changed=e.target.closest("#ints .chip").textContent;quizGenerated=quizGenerated.filter(function(t){return normText(t)!==normText(changed)})}});
+function updateQuizProgress(){var answered=document.querySelectorAll("#interest-quiz input[type=radio]:checked").length,remaining=Math.max(0,3-answered);$("quiz-progress-count").textContent=answered+" / 5";$("quiz-progress-fill").style.width=(answered*20)+"%";$("quiz-progress-label").textContent=answered===5?"All five answered. You’re ready.":answered>=3?"Enough to see your results. Add more answers if you like.":"Choose "+remaining+" more "+(remaining===1?"answer":"answers")+" to see your results.";$("quiz-apply").disabled=answered<3;$("quiz-apply").textContent=answered<3?"Answer "+remaining+" more "+(remaining===1?"question":"questions"):"See my interests and paths"}
+[].forEach.call(document.querySelectorAll("#interest-quiz input[type=radio]"),function(input){input.addEventListener("change",updateQuizProgress)});updateQuizProgress();
+$("quiz-apply").onclick=function(){var checked=[].slice.call(document.querySelectorAll("#interest-quiz input[type=radio]:checked")),error=$("quiz-error"),result=$("quiz-result");if(checked.length<3){error.textContent="Choose at least three answers before updating your suggestions.";return}error.textContent="";
+quizGenerated.forEach(function(t){var k=key("interest",t);if(!sel[k])return;delete sel[k];[].forEach.call($("ints").children,function(b){if(normText(b.textContent)===normText(t))b.setAttribute("aria-pressed","false")})});quizGenerated=[];
+var score=Object.create(null),first=Object.create(null),order=0;checked.forEach(function(input){(input.getAttribute("data-tags")||"").split("|").forEach(function(raw){var t=raw.trim();if(!t)return;if(score[t]===undefined){score[t]=0;first[t]=order++}score[t]++})});
+var picks=Object.keys(score).sort(function(a,b){return score[b]-score[a]||first[a]-first[b]}).slice(0,5);picks.forEach(function(t){var selected=!!sel[key("interest",t)];selectSaved(t,"ints","interest");if(!selected)quizGenerated.push(t)});updateCounts();result.textContent="Interest clues to try: "+picks.join(", ")+". They’re suggestions, not a label—edit them below anytime.";
+var matches=C.map(function(c){var hits=[],points=0;c.interests.forEach(function(interest){var best=0;picks.forEach(function(pick){if(related(pick,interest,"interest"))best=Math.max(best,score[pick]||0)});if(best){hits.push(interest);points+=best}});return points?{career:c,points:points,hits:hits}:null}).filter(Boolean).sort(function(a,b){return b.points-a.points||b.hits.length-a.hits.length||a.career.title.localeCompare(b.career.title)}).slice(0,3),list=$("quiz-path-list");list.innerHTML="";matches.forEach(function(match){var card=document.createElement("article");card.className="quiz-path";var info=document.createElement("div"),cluster=document.createElement("span"),title=document.createElement("h4"),detail=document.createElement("div"),whyText=document.createElement("p"),move=document.createElement("p");cluster.className="cluster";cluster.textContent=match.career.cluster;title.textContent=match.career.title;whyText.textContent="Connects with your quiz interests: "+match.hits.slice(0,2).join(", ")+".";var strong=document.createElement("strong");strong.textContent="Try this first: ";move.appendChild(strong);move.appendChild(document.createTextNode(match.career.move));info.appendChild(cluster);info.appendChild(title);detail.appendChild(whyText);detail.appendChild(move);card.appendChild(info);card.appendChild(detail);list.appendChild(card)});$("quiz-paths").hidden=!matches.length};
+$("catalog-count").textContent="Compared across "+C.length+" career profiles.";
+function show(n){[1,2,3].forEach(function(i){$("p"+i).hidden=i!==n});[].forEach.call(document.querySelectorAll("#prog li"),function(li,i){li.className=i+1===n?"on":(i+1<n?"done":"");if(i+1===n)li.setAttribute("aria-current","step");else li.removeAttribute("aria-current")});$("flow").scrollIntoView({behavior:reduce?"auto":"smooth",block:"nearest"})}
+function setStatus(s){prof.status=s;[].forEach.call($("seg").children,function(o){o.setAttribute("aria-pressed",o.getAttribute("data-v")===s?"true":"false")});var st=$("f-stage");st.disabled=false;st.innerHTML='<option value="">Select your stage</option>'+STG[s].map(function(x){return"<option>"+x+"</option>"}).join("");$("f-field").placeholder=s==="Student"?"e.g. Computer Science":"e.g. Marketing executive";$("l-field").textContent=s==="Student"?"What are you studying":"Your current role"}
+[].forEach.call($("seg").children,function(b){b.onclick=function(){setStatus(b.getAttribute("data-v"))}});
+function profile(){var picks=Object.keys(sel).map(function(k){return sel[k]}),skills=picks.filter(function(x){return x.kind==="skill"}).map(function(x){return x.text}),interests=picks.filter(function(x){return x.kind==="interest"}).map(function(x){return x.text});return{name:$("f-name").value.trim().slice(0,60),status:prof.status,stage:$("f-stage").value,goal:$("f-goal").value,field:$("f-field").value.trim().slice(0,80),skills:skills,interests:interests,picks:skills.concat(interests),aiConsent:$("ai-consent").checked}}
+function signature(pr){return JSON.stringify([pr.status,pr.stage,pr.goal,normText(pr.field),(pr.skills||[]).map(normText).sort(),(pr.interests||[]).map(normText).sort()])}
+$("n1").onclick=function(){var e=$("e1");if(!$("f-name").value.trim()){e.textContent="Please add your name.";$("f-name").focus();return}if(!prof.status){e.textContent="Choose student or working professional.";return}if(!$("f-stage").value){e.textContent="Select your stage.";$("f-stage").focus();return}e.textContent="";save(false);show(2)};
+$("b2").onclick=function(){show(1)};
+$("n2").onclick=function(){if(Object.keys(sel).length<2){$("e2").textContent="Choose at least two skills or interests.";return}$("e2").textContent="";go()};
+$("edit").onclick=function(){show(2)};
+$("reset").onclick=function(){$("ai-consent").checked=false;["f-name","f-field","c-sk","c-in","skill-search","interest-search"].forEach(function(i){$(i).value=""});build();quizGenerated=[];[].forEach.call(document.querySelectorAll("#interest-quiz input"),function(i){i.checked=false});updateQuizProgress();$("quiz-error").textContent="";$("quiz-result").textContent="";$("quiz-paths").hidden=true;$("quiz-path-list").innerHTML="";prof.status="";[].forEach.call($("seg").children,function(o){o.setAttribute("aria-pressed","false")});var s=$("f-stage");s.disabled=true;s.innerHTML='<option value="">Choose above first</option>';$("f-goal").value="direction";$("out").innerHTML="";$("wel").hidden=true;$("noted").textContent="";save(true);show(1)};
+function fieldMatch(pr,c){var f=normText(pr.field);if(!f)return false;var words=f.split(" ").filter(function(w){return w.length>2&&["student","studies","study","current","role","year","years","degree"].indexOf(w)<0}),target=normText(c.title+" "+c.cluster+" "+c.keywords.join(" ")+" "+c.skills.join(" ")),targetWords=target.split(" ");if(words.some(function(w){return targetWords.indexOf(w)>-1}))return true;var cluster=FIELDWORDS[normText(c.cluster)],fieldWords=f.split(" ");return !!(cluster&&cluster.some(function(w){var term=normText(w);return term.indexOf(" ")>-1?f.indexOf(term)>-1:fieldWords.indexOf(term)>-1}))}
+function projectRecipe(c,focus){var cluster=normText(c.cluster),skill=focus||c.skills[0]||"one core skill";if(cluster==="technology data")return"Build a tiny demo or script that solves one real problem using "+skill+"; save a screenshot and the working file.";if(cluster==="business finance")return"Make a one-page decision brief using "+skill+": one question, a small table or budget, your recommendation and its assumptions.";if(cluster==="health care")return"Create a safe, fictional care workflow or public health explainer using "+skill+"; keep it non-clinical and use no real patient data.";if(cluster==="science environment")return"Use a safe experiment or open dataset with "+skill+"; make one chart or observation and explain what it does and does not show.";if(cluster==="design media")return"Create one sketch, mock-up, short clip or campaign using "+skill+"; ask two people to try it and note where they get stuck.";if(cluster==="education public service")return"Make a 10-minute lesson, plain-language guide or service plan using "+skill+"; try it with one person and revise the confusing part.";if(cluster==="engineering built world")return"Sketch or model a small component or process using "+skill+"; include dimensions, materials, constraints and safety checks.";if(cluster==="hospitality places")return"Make a sample service plan, menu, itinerary or event schedule using "+skill+"; time it and fix one point of friction.";return"Make a small sample of the work in "+c.title+" using "+skill+"; finish it in 60–90 minutes and save what you made."}
+function feedbackRecipe(pr,c){if(pr.goal==="switch")return"Show it to someone in the role or field; ask which of your strengths transfers and what one gap to tackle first.";if(pr.goal==="grow")return"Ask a teammate or practitioner to try it against a stretch task, give one specific note, then revise it.";return"Show it to a teacher, mentor, peer, or someone in the field; ask what would make it useful at work, then revise it."}
+function local(pr){var ps=pr.skills||[],pi=pr.interests||[],signals=ps.length+pi.length;if(!signals)return[];
+return C.map(function(c){var ms=c.skills.filter(function(t){return ps.some(function(p){return related(p,t,"skill")})}),mi=c.interests.filter(function(t){return pi.some(function(p){return related(p,t,"interest")})});if(!ms.length&&!mi.length)return null;
+var skillCoverage=ms.length/c.skills.length,interestCoverage=mi.length/c.interests.length,precision=(ms.length+mi.length)/signals,context=fieldMatch(pr,c),goal=pr.goal==="grow"&&context?5:(pr.goal==="switch"&&!context&&ms.length?3:0);
+var fit=Math.max(42,Math.min(97,Math.round(42+skillCoverage*32+interestCoverage*24+precision*8+(context?7:0)+goal)));
+var have=ms.concat(mi).slice(0,4),gaps=c.skills.filter(function(t){return !ps.some(function(p){return related(p,t,"skill")})}).slice(0,3),focus=gaps[0]||ms[0]||c.skills[0];
+var whyText=mi.length&&ms.length?"You’re drawn to "+mi.slice(0,2).join(" and ")+" and already bring "+ms.slice(0,2).join(" and ")+"—both are useful in this path.":mi.length?"Your interest in "+mi.slice(0,2).join(" and ")+" fits the kind of work in this path.":"Your experience with "+ms.slice(0,2).join(" and ")+" gives you a place to start in this path.";if(context)whyText+=" It connects to your field, too.";
+var road=[projectRecipe(c,focus),feedbackRecipe(pr,c),"Practice "+focus+" for 30 minutes, make one improvement from the feedback, and save the before-and-after version."];
+return{id:c.id,title:c.title,cluster:c.cluster,fit:fit,why:whyText,have:have,gaps:gaps,move:c.move,road:road,watch:c.watch}}).filter(Boolean).sort(function(a,b){return b.fit-a.fit})}
+function head(pr){$("sum-h").textContent=pr.name+", your paths";$("sum-p").textContent=[pr.status,lc(pr.stage||""),pr.field].filter(Boolean).join(", ")+". "+GOAL[pr.goal||"direction"]}
+function tmo(p,ms){return new Promise(function(res,rej){var t=setTimeout(function(){rej({code:"timeout"})},ms);p.then(function(v){clearTimeout(t);res(v)},function(e){clearTimeout(t);rej(e)})})}
+function safeText(v,n){return typeof v==="string"?v.replace(/[\u0000-\u001f]/g," ").trim().slice(0,n):""}
+async function ai(pr,ranked){why="";if(!supa||!pr.aiConsent){why="local";return null}
+var shortlist=ranked.slice(0,8),allowed=Object.create(null);shortlist.forEach(function(x){allowed[x.id]=x});
+try{await ensureBackendUser();var result=await tmo(supa.functions.invoke("career-advice",{body:{mode:"match",profile:{status:pr.status,stage:pr.stage,goal:pr.goal,field:pr.field,skills:pr.skills,interests:pr.interests},candidates:shortlist.map(function(x){return{id:x.id,title:x.title,cluster:x.cluster,matched:x.have,gaps:x.gaps,firstMove:x.move,caveat:x.watch}})}}),45000);
+if(result.error)throw result.error;var items=result.data&&Array.isArray(result.data.paths)?result.data.paths:[],edits=Object.create(null);items.forEach(function(x){if(x&&allowed[x.id])edits[x.id]=x});
+if(!Object.keys(edits).length){why="fail";return null}
+why="ai";return ranked.map(function(base){var x=edits[base.id];if(!x)return base;var road=Array.isArray(x.roadmap)?x.roadmap.slice(0,3).map(function(t){return safeText(t,140)}).filter(Boolean):base.road;return Object.assign({},base,{why:safeText(x.why,220)||base.why,move:safeText(x.move,160)||base.move,road:road.length?road:base.road,watch:safeText(x.watchout,200)||base.watch})})}
+catch(e){why=e&&e.status===429?"busy":"fail";return null}}
+async function go(){if(busy)return;busy=true;why="";var pr=profile();head(pr);$("out").innerHTML='<p class="load">Comparing your profile with career paths…</p>';$("noted").textContent="";$("ask").hidden=true;$("qa").innerHTML="";chat=[];show(3);
+try{var ranked=local(pr),paths=ranked,src="local";if(pr.aiConsent&&supa&&ranked.length){var enhanced=await ai(pr,ranked);if(enhanced){paths=enhanced;src="ai"}}last={paths:paths,pr:pr,aiConsent:!!(pr.aiConsent&&supa&&ranked.length)};draw(paths,src);save(false,paths)}
+catch(e){why="fail";last={paths:[],pr:pr,aiConsent:false};draw([], "local");$("noted").textContent="The matcher could not complete. Please adjust your selections and try again."}
+finally{busy=false}}
+function draw(paths,src){var out=$("out"),visible=8;out.innerHTML="";
+if(!paths||!paths.length){out.innerHTML='<p class="empty">No close matches yet. Add a few more skills or interests, or try different search terms.</p>';$("ask").hidden=true;return}
+function render(){out.innerHTML="";var count=document.createElement("p");count.className="hint";count.textContent="Showing "+Math.min(visible,paths.length)+" of "+paths.length+" matched career paths.";out.appendChild(count);
+paths.slice(0,visible).forEach(function(x,i){var d=document.createElement("div");d.className="res";d.style.setProperty("--d",(i*.08)+"s");
+d.innerHTML='<div class="top"><h4></h4><span class="pct"></span></div><div class="bar"><b></b></div><p class="why"></p><p class="cov"></p><p class="mv"></p><h5 class="road-title">A practical way in</h5><ol class="rd"></ol><p class="wo"></p>';
+d.querySelector("h4").textContent=x.title;d.querySelector(".pct").textContent=x.fit+"% fit";d.querySelector(".why").textContent=x.why||"";
+var have=x.have||[],gaps=x.gaps||[],c=d.querySelector(".cov"),sg=document.createElement("strong");sg.textContent="You bring: ";c.appendChild(sg);c.appendChild(document.createTextNode(have.join(", ")||"your range of interests"));
+if(gaps.length){var g=document.createElement("strong");g.textContent="   To add: ";c.appendChild(g);c.appendChild(document.createTextNode(gaps.join(", ")))}
+var m=d.querySelector(".mv"),sm=document.createElement("strong");sm.textContent="Try this first: ";m.appendChild(sm);m.appendChild(document.createTextNode(x.move||""));
+var ol=d.querySelector(".rd"),roadTitle=d.querySelector(".road-title");if(x.road&&x.road.length)x.road.forEach(function(t,k){var li=document.createElement("li");li.setAttribute("data-d",["MAKE A SAMPLE","GET FEEDBACK","IMPROVE IT"][k]||"");li.textContent=t;ol.appendChild(li)});else{ol.remove();roadTitle.remove()}
+var wo=d.querySelector(".wo");if(x.watch)wo.textContent="Watch out: "+x.watch;else wo.remove();
+out.appendChild(d);requestAnimationFrame(function(){requestAnimationFrame(function(){d.querySelector(".bar b").style.width=x.fit+"%"})})});
+if(visible<paths.length){var more=document.createElement("button");more.type="button";more.className="btn o";more.style.marginTop="20px";more.textContent="Show "+Math.min(8,paths.length-visible)+" more paths";more.setAttribute("aria-label","Show more ranked career paths");more.onclick=function(){visible=Math.min(paths.length,visible+8);render()};out.appendChild(more)}}
+render();$("ask").hidden=!(supa&&last.aiConsent);
+var note="Fit scores compare your selected signals with career profiles; they are not hiring odds. ";
+if(src==="ai")note+="Claude added advice to your locally ranked paths.";
+else if(src==="saved")note+="These are your saved paths.";
+else if(why==="denied")note+="AI access was not granted, so your results use the local matcher.";
+else if(why==="busy")note+="Claude is busy; your results use the local matcher.";
+else if(why==="fail"&&last.aiConsent)note+="AI advice was unavailable; your results use the local matcher.";
+else note+="Matched locally on this device.";
+$("noted").textContent=note}
+async function ask(){var q=$("q").value.trim().slice(0,200);if(!q||!supa||!last.aiConsent||!last.paths||busyQ)return;busyQ=true;$("q").value="";
+var d=document.createElement("div");d.className="qa";var h=document.createElement("p");h.className="qq";h.textContent=q;var a=document.createElement("p");a.className="aa load";a.textContent="Thinking…";d.appendChild(h);d.appendChild(a);$("qa").insertBefore(d,$("qa").firstChild);
+var pr=last.pr||profile(),request={mode:"followup",profile:{status:pr.status,stage:pr.stage,goal:pr.goal,field:pr.field,skills:pr.skills,interests:pr.interests},paths:last.paths.slice(0,8).map(function(x){return x.title}),history:chat,question:q};
+try{await ensureBackendUser();var r=await tmo(supa.functions.invoke("career-advice",{body:request}),45000);if(r.error)throw r.error;var answer=safeText(r.data&&r.data.answer,1600);a.classList.remove("load");a.textContent=answer||"Couldn’t answer just now. Please try again.";chat.push([q,answer.slice(0,300)]);if(chat.length>4)chat.shift()}
+catch(e){a.classList.remove("load");a.textContent=e&&e.status===429?"Too many requests right now. Please wait a moment and try again.":"Couldn’t answer just now. Please try again."}finally{busyQ=false}}
+$("qb").onclick=ask;$("q").addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();ask()}});
+/* Local-first profile storage, with optional Supabase sync. */
+function lsGet(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}}
+function lsSet(o){try{if(o)localStorage.setItem(LS,JSON.stringify(o));else{localStorage.removeItem(LS);localStorage.removeItem(OLDLS)}}catch(e){}}
+function stampOf(value){if(typeof value==="number")return value;var n=Date.parse(value||"");return isFinite(n)?n:0}
+function savedSignature(d){return signature({status:d.status||d.audience||"",stage:d.stage||"",goal:d.goal||"direction",field:d.field||"",skills:d.skills||[],interests:d.interests||[]})}
+function initBackend(){var cfg=window.VERTEZ_SUPABASE_CONFIG||{};if(!cfg.url||!cfg.publishableKey||!window.supabase||typeof window.supabase.createClient!=="function")return false;
+try{supa=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});return true}catch(e){supa=null;return false}}
+function loadTurnstile(){if(window.turnstile)return Promise.resolve(window.turnstile);if(turnstileApiPromise)return turnstileApiPromise;
+turnstileApiPromise=new Promise(function(resolve,reject){var script=document.createElement("script");script.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";script.async=true;script.defer=true;script.onload=function(){if(window.turnstile)resolve(window.turnstile);else reject(new Error("Turnstile did not load"))};script.onerror=function(){reject(new Error("Turnstile could not load"))};document.head.appendChild(script)});return turnstileApiPromise}
+function getCaptchaToken(){var cfg=window.VERTEZ_SUPABASE_CONFIG||{};if(!cfg.turnstileSiteKey)return Promise.reject(new Error("Account protection is not configured"));
+return loadTurnstile().then(function(api){return new Promise(function(resolve,reject){var timer=setTimeout(function(){captchaPending=null;reject(new Error("Captcha timed out"))},20000);
+captchaPending={resolve:function(token){clearTimeout(timer);captchaPending=null;resolve(token)},reject:function(error){clearTimeout(timer);captchaPending=null;reject(error)}};
+var options={sitekey:cfg.turnstileSiteKey,size:"invisible",appearance:"execute",callback:function(token){if(captchaPending)captchaPending.resolve(token)},"error-callback":function(){if(captchaPending)captchaPending.reject(new Error("Captcha could not be verified"))},"expired-callback":function(){if(captchaPending)captchaPending.reject(new Error("Captcha expired"))}};
+try{if(turnstileWidget===null)turnstileWidget=api.render("#turnstile-container",options);else api.reset(turnstileWidget);api.execute(turnstileWidget)}catch(e){captchaPending.reject(e)}})})}
+async function ensureBackendUser(){if(accountDeleting)throw new Error("Account deletion is in progress");if(!supa)throw new Error("Supabase is not configured");if(uid)return uid;if(authPromise)return authPromise;
+authPromise=(async function(){var current=await supa.auth.getSession();if(current.error)throw current.error;if(current.data.session&&current.data.session.user){uid=current.data.session.user.id;$("account-actions").hidden=false;return uid}
+var token=await getCaptchaToken(),created=await supa.auth.signInAnonymously({options:{captchaToken:token}});if(created.error)throw created.error;if(!created.data.user)throw new Error("Anonymous sign-in failed");uid=created.data.user.id;$("account-actions").hidden=false;return uid})().finally(function(){authPromise=null});return authPromise}
+function selectSaved(t,box,kind){if(!t||typeof t!=="string")return;var v=t.trim().slice(0,40);if(!v)return;var ex=[].slice.call($(box).children).filter(function(c){return normText(c.textContent)===normText(v)})[0];if(ex){if(ex.getAttribute("aria-pressed")!=="true")ex.click()}else chip(v,$(box),true,kind)}
+async function save(clear,paths){var stamp=Date.now(),pr=null,sig="",preserved=null;
+if(clear)lsSet(null);else{pr=profile();var previous=lsGet(LS)||lsGet(OLDLS)||{};sig=signature(pr);preserved=previous.profileKey===sig?previous.paths:null;var o={schemaVersion:2,name:pr.name,status:pr.status,stage:pr.stage,goal:pr.goal,field:pr.field,skills:pr.skills,interests:pr.interests,picks:pr.picks,profileKey:sig,updatedAt:stamp,paths:paths||preserved};lsSet(o)}
+if(!supa)return;
+var operation=async function(){try{if(accountDeleting)return;if(clear){if(!uid)return;await supa.from("career_results").delete().eq("user_id",uid);await supa.from("profiles").delete().eq("user_id",uid);return}
+var userId=await ensureBackendUser(),record={user_id:userId,display_name:pr.name,audience:pr.status,stage:pr.stage,goal:pr.goal,field:pr.field,skills:pr.skills,interests:pr.interests,schema_version:2};var saved=await supa.from("profiles").upsert(record,{onConflict:"user_id"});if(saved.error)throw saved.error;
+if(paths){var result=await supa.from("career_results").upsert({user_id:userId,profile_key:sig,results:paths,schema_version:2},{onConflict:"user_id"});if(result.error)throw result.error}}catch(e){}};
+cloudQueue=cloudQueue.then(operation,operation);await cloudQueue}
+async function restore(useRemote){if(formDirty)return;var localData=lsGet(LS)||lsGet(OLDLS),remoteData=null,remotePaths=null;
+if(useRemote&&supa&&uid){try{var profileRead=await supa.from("profiles").select("*").eq("user_id",uid).maybeSingle(),resultRead=await supa.from("career_results").select("*").eq("user_id",uid).maybeSingle();
+if(!profileRead.error&&profileRead.data){var p=profileRead.data;remoteData={schemaVersion:p.schema_version,name:p.display_name,status:p.audience,stage:p.stage,goal:p.goal,field:p.field,skills:p.skills||[],interests:p.interests||[],updatedAt:stampOf(p.updated_at)};if(!resultRead.error&&resultRead.data){var rr=resultRead.data;if(rr.profile_key===savedSignature(remoteData)){remotePaths=Array.isArray(rr.results)?rr.results:null;remoteData.profileKey=rr.profile_key;remoteData.paths=remotePaths}}}}
+catch(e){}}
+var localStamp=stampOf(localData&&(localData.updatedAt||localData.at)),remoteStamp=stampOf(remoteData&&remoteData.updatedAt),useLocal=!!localData&&(!remoteData||localStamp>=remoteStamp),d=useLocal?localData:remoteData,paths=useLocal?(localData.paths||null):(remotePaths||null);
+if(!d||!d.name||formDirty)return;
+if(paths){var expected=savedSignature(d),key=d.profileKey;if(key&&key!==expected)paths=null}
+restoring=true;try{$("f-name").value=d.name||"";var status=d.status||d.audience||"";if(status&&STG[status]){setStatus(status);$("f-stage").value=d.stage||""}
+$("f-goal").value=d.goal||"direction";$("f-field").value=d.field||"";
+if(Array.isArray(d.skills)||Array.isArray(d.interests)){(d.skills||[]).forEach(function(t){selectSaved(t,"skills","skill")});(d.interests||[]).forEach(function(t){selectSaved(t,"ints","interest")})}
+else (d.picks||[]).forEach(function(t){var isInterest=IN.some(function(x){return normText(x)===normText(t)});selectSaved(t,isInterest?"ints":"skills",isInterest?"interest":"skill")});
+updateCounts();$("wel").hidden=false}finally{restoring=false}
+[].forEach.call($("wel").querySelectorAll(".saved-paths"),function(x){x.remove()});if(paths&&paths.length){var bt=document.createElement("button");bt.type="button";bt.className="btn o saved-paths";bt.style.cssText="margin-left:14px;padding:10px 16px";bt.textContent="See my last paths";bt.onclick=function(){var current=profile();last={paths:paths,pr:current,aiConsent:false};head(current);$("qa").innerHTML="";draw(paths,"saved");show(3)};$("wel").appendChild(bt)}
+if(useLocal&&supa&&uid&&(!remoteData||localStamp>remoteStamp))save(false,paths);
+if(localData&&(!localData.schemaVersion||localData.schemaVersion<2))save(false,paths)}
+(async function boot(){await restore(false);var configured=initBackend();if(!configured)return;
+try{var session=await supa.auth.getSession();if(session.data&&session.data.session&&session.data.session.user)uid=session.data.session.user.id;
+supa.auth.onAuthStateChange(function(_event,current){uid=current&&current.user?current.user.id:null;$("account-actions").hidden=!uid});
+if(uid||((window.VERTEZ_SUPABASE_CONFIG||{}).turnstileSiteKey))$("ai-option").hidden=false;
+$("account-actions").hidden=!uid;
+if(uid)await restore(true)}catch(e){}})();
+$("delete-data").onclick=async function(){if(!supa||!uid)return;if(!window.confirm("Delete your anonymous account, saved profile, career results, waitlist signup and AI usage records? This cannot be undone."))return;
+var button=$("delete-data"),status=$("account-status");button.disabled=true;accountDeleting=true;status.textContent="Deleting…";
+try{var result=await supa.functions.invoke("delete-account",{body:{}});if(result.error)throw result.error;await supa.auth.signOut({scope:"local"});uid=null;lsSet(null);$("account-actions").hidden=true;$("reset").click();$("e1").textContent="Your account and saved data were deleted.";accountDeleting=false}
+catch(e){accountDeleting=false;status.textContent="We couldn’t delete everything just now. Please try again.";button.disabled=false}}
+$("go").onclick=async function(){var v=$("em").value.trim(),m=$("msg");if(!/^\S+@\S+\.\S+$/.test(v)){m.textContent="Please enter a valid email address.";return}
+if(!supa){m.textContent="Early access sign-up is not configured yet. Please check back soon.";return}
+try{await ensureBackendUser();var result=await supa.functions.invoke("join-waitlist",{body:{email:v}});if(result.error)throw result.error;m.textContent="You’re on the list. We’ll be in touch.";$("em").value=""}
+catch(e){m.textContent=e&&e.status===429?"Please try again tomorrow.":"We couldn’t save that just now. Please try again later."}};
+
+})();
+</script>
+</body>
+</html>
